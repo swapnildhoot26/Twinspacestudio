@@ -500,6 +500,8 @@ body.modal-open { overflow: hidden; }
 .u127{margin: 0px; max-width: 30ch; font-size: 12.5px; line-height: 1.85; font-weight: 400; color: rgb(91, 83, 71)}
 .u128{display: flex; gap: 10px}
 .u129{width: 38px; height: 38px; border: 1px solid rgba(42, 36, 30, 0.24); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9.5px; letter-spacing: 0.08em; transition: background 350ms, color 350ms}
+.u129b{display: flex; align-items: center; gap: 8px; padding: 11px 20px; border: 1px solid rgba(42, 36, 30, 0.24); border-radius: 999px; font-size: 9.5px; letter-spacing: 0.08em; color: inherit; transition: background 350ms, color 350ms}
+.u129b:hover{background: #2A241E; color: #F5F4F0}
 .u130{display: flex; flex-direction: column; gap: 11px}
 .u131{margin: 0px 0px 5px; font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(138, 127, 112)}
 .u132{font-size: 13px; font-weight: 400}
