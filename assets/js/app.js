@@ -185,17 +185,17 @@
     const ink = solid ? '#2A241E' : '#F5F0E8';
     nav.querySelectorAll('[data-navink]').forEach((link) => {
       link.style.color = ink;
-      link.style.textShadow = solid ? 'none' : '0 1px 10px rgba(28,24,20,.55)';
+      link.style.textShadow = solid ? 'none' : '0 1px 3px rgba(28,24,20,.75)';
     });
     if (navToggle) navToggle.style.color = ink;
     const logo = nav.querySelector('[data-navlogo]');
     if (logo) logo.src = solid ? 'assets/images/logo-mark.png' : 'assets/images/logo-mark-light.png';
     const pill = nav.querySelector('[data-navpill]');
     if (pill) {
-      pill.style.background = solid ? '#B08D57' : 'transparent';
-      pill.style.borderColor = solid ? '#B08D57' : 'rgba(245,240,232,.45)';
-      pill.style.color = solid ? '#fff' : '#F5F0E8';
-      pill.style.boxShadow = solid ? '0 6px 18px rgba(42,36,30,.18)' : 'none';
+      pill.style.background = '#B08D57';
+      pill.style.borderColor = '#B08D57';
+      pill.style.color = '#fff';
+      pill.style.boxShadow = '0 6px 18px rgba(42,36,30,.18)';
     }
     const parallax = document.querySelector('[data-parallax]');
     if (parallax && !reduceMotion) parallax.style.transform = `translate3d(0,${Math.min(y * 0.16, 170)}px,0)`;
