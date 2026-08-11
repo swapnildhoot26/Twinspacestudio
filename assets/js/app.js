@@ -82,7 +82,7 @@
     const item = gallery[galleryIndex];
     const image = lightbox.querySelector('[data-lightbox-image]');
     const caption = lightbox.querySelector('[data-lightbox-caption]');
-    const count = [...lightbox.querySelectorAll('p')].find((node) => /^\d+\s*\/\s*\d+$/.test(node.textContent.trim()));
+    const count = lightbox.querySelector('[data-lightbox-count]');
     if (image) {
       image.style.backgroundImage = `url("${item.src}")`;
       image.setAttribute('aria-label', item.alt);
