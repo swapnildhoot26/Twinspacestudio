@@ -552,8 +552,8 @@ body.modal-open { overflow: hidden; }
 .u177{position: relative; height: clamp(280px, 56vh, 660px); background-color: rgb(216, 205, 187); background-image: url("../opt/c02.jpg"); background-size: cover; background-position: center center; overflow: hidden}
 .u178{width: 46px; height: 46px; flex: 0 0 auto; border-radius: 50%; background-color: rgb(42, 36, 30); background-image: url("../images/external/508602b4-eeb0-4882-9643-30479f059948.jpg"); background-size: cover; background-position: center 28%; box-shadow: rgba(42, 36, 30, 0.18) 0px 0px 0px 1px}
 .u179{position: relative; height: clamp(280px, 56vh, 660px); background-color: rgb(216, 205, 187); background-image: url("../opt/d01.jpg"); background-size: cover; background-position: center center; overflow: hidden}
-.u180{position: relative; height: clamp(280px, 56vh, 660px); background-color: rgb(216, 205, 187); background-image: url("../images/external/803afd0a-f479-4da0-a967-2943f235d6cf.jpg"); background-size: cover; background-position: center center; overflow: hidden}
-.u181{position: relative; height: clamp(280px, 56vh, 660px); background-color: rgb(216, 205, 187); background-image: url("../images/external/784d39fa-baa5-4c25-b78c-3d57b027743a.jpg"); background-size: cover; background-position: center center; overflow: hidden}
+.u180{position: relative; height: clamp(280px, 56vh, 660px); background-color: rgb(216, 205, 187); background-image: url("../opt/f01.jpg"); background-size: cover; background-position: center center; overflow: hidden}
+.u181{position: relative; height: clamp(280px, 56vh, 660px); background-color: rgb(216, 205, 187); background-image: url("../opt/e01.jpg"); background-size: cover; background-position: center center; overflow: hidden}
 .u182{position: sticky; top: 0px; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px clamp(18px, 5vw, 54px); background: rgba(245, 240, 232, 0.94); border-bottom: 1px solid rgba(42, 36, 30, 0.12)}
 .u183{background: rgb(42, 36, 30); color: rgb(245, 240, 232); padding: clamp(48px, 8vw, 110px) clamp(20px, 5vw, 64px)}
 .u184{max-width: 1160px; margin: 0px auto}
