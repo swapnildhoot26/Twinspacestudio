@@ -259,7 +259,7 @@
       heading: 'Designed for today. Made for tomorrow.',
       text: 'We wanted a home that felt luxurious for us, yet safe, fun and inspiring for our kids. Pooja perfectly balanced elegance with practicality, creating spaces where our family can live, play and make memories together.',
       name: 'Sachin Sharma', location: '4 BHK, Escon, Kondhwa',
-      image: 'assets/opt/b02.jpg', face: 'assets/opt/face-sachin.jpg'
+      image: 'assets/opt/b08.jpg', face: 'assets/opt/face-sachin.jpg'
     }
   ];
   const testimonialRoot = document.querySelector('[data-testimonials]');
