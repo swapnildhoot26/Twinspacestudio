@@ -273,6 +273,24 @@
       text: 'We wanted a home that felt luxurious for us, yet safe, fun and inspiring for our kids. Pooja and Dimple perfectly balanced elegance with practicality, creating spaces where our family can live, play and make memories together.',
       name: 'Sachin Sharma', location: '4 BHK, Escon, Kondhwa',
       image: 'assets/opt/b08.jpg', face: 'assets/opt/face-sachin.jpg'
+    },
+    {
+      heading: 'Clarity before commitment.',
+      text: 'Our biggest concern was going over budget. Pooja and Dimple helped us make the right choices early, explained where it was worth investing, and kept the entire process transparent. There were no unpleasant surprises—just a home that felt worth every rupee.',
+      name: 'Bhavik Shah', location: '2 BHK, Punawale',
+      image: 'assets/opt/f02.jpg', face: 'assets/opt/face-bhavik.jpg'
+    },
+    {
+      heading: 'A home without the hassle.',
+      text: 'With both of us working, we simply didn’t have the time to coordinate designers, vendors and site work. Pooja and Dimple took care of the details and kept us updated throughout. We could actually enjoy the process instead of constantly managing it.',
+      name: 'Aniket Marathe', location: '3 BHK Duplex, Pune',
+      image: 'assets/opt/e09.jpg', face: 'assets/opt/face-aniket.jpg'
+    },
+    {
+      heading: 'Every corner has a purpose.',
+      text: 'Our 2BHK wasn’t very large, and we were worried that adding everything we needed would make it feel cramped. They found smart ways to bring in storage, functionality and style without compromising the openness of the home. It finally feels like every corner has a purpose.',
+      name: 'Ashish Kadhane', location: '2 BHK, Pune',
+      image: 'assets/opt/d03.jpg', face: 'assets/opt/face-ashish.jpg'
     }
   ];
   const testimonialRoot = document.querySelector('[data-testimonials]');
