@@ -294,7 +294,38 @@
     }
   ];
   const testimonialRoot = document.querySelector('[data-testimonials]');
+  const TESTIMONIAL_MS = 5000;
   let testimonialIndex = 0;
+  let testimonialTimer = null;
+  let testimonialAutoplay = true;
+  let testimonialHovered = false;
+
+  function stopTestimonialProgress() {
+    const active = testimonialRoot?.querySelector('[data-testimonial-dot][aria-current="true"] > *');
+    if (active) {
+      active.classList.remove('is-playing');
+      active.style.transitionDuration = '';
+    }
+    if (testimonialTimer) {
+      clearTimeout(testimonialTimer);
+      testimonialTimer = null;
+    }
+  }
+
+  function playTestimonialProgress() {
+    stopTestimonialProgress();
+    if (!testimonialAutoplay || testimonialHovered || reduceMotion || !testimonialRoot) return;
+    const active = testimonialRoot.querySelector('[data-testimonial-dot][aria-current="true"] > *');
+    if (active) {
+      active.style.backgroundSize = '0% 100%';
+      void active.offsetWidth;
+      active.classList.add('is-playing');
+      active.style.transitionDuration = `${TESTIMONIAL_MS}ms`;
+      active.style.backgroundSize = '100% 100%';
+    }
+    testimonialTimer = setTimeout(() => renderTestimonial(testimonialIndex + 1), TESTIMONIAL_MS);
+  }
+
   function renderTestimonial(index) {
     if (!testimonialRoot) return;
     testimonialIndex = (index + testimonials.length) % testimonials.length;
@@ -308,13 +339,35 @@
     testimonialRoot.querySelector('[data-testimonial-face]').style.backgroundImage = item.face ? `url("${item.face}")` : 'none';
     testimonialRoot.querySelectorAll('[data-testimonial-dot]').forEach((dot, dotIndex) => {
       const line = dot.firstElementChild || dot;
-      line.style.width = dotIndex === testimonialIndex ? '20px' : '10px';
-      line.style.background = dotIndex === testimonialIndex ? '#B08D57' : 'rgba(42,36,30,.28)';
+      const active = dotIndex === testimonialIndex;
+      dot.setAttribute('aria-current', active ? 'true' : 'false');
+      line.classList.remove('is-playing');
+      line.style.transitionDuration = '';
+      line.style.backgroundSize = active ? '100% 100%' : '0% 100%';
     });
+    playTestimonialProgress();
   }
-  testimonialRoot?.querySelectorAll('[data-testimonial-dot]').forEach((dot, index) => dot.addEventListener('click', () => renderTestimonial(index)));
-  testimonialRoot?.querySelector('[aria-label="Previous testimonial"]')?.addEventListener('click', () => renderTestimonial(testimonialIndex - 1));
-  testimonialRoot?.querySelector('[aria-label="Next testimonial"]')?.addEventListener('click', () => renderTestimonial(testimonialIndex + 1));
+
+  testimonialRoot?.querySelectorAll('[data-testimonial-dot]').forEach((dot, index) => dot.addEventListener('click', () => {
+    testimonialAutoplay = false;
+    renderTestimonial(index);
+  }));
+  testimonialRoot?.querySelector('[aria-label="Previous testimonial"]')?.addEventListener('click', () => {
+    testimonialAutoplay = false;
+    renderTestimonial(testimonialIndex - 1);
+  });
+  testimonialRoot?.querySelector('[aria-label="Next testimonial"]')?.addEventListener('click', () => {
+    testimonialAutoplay = false;
+    renderTestimonial(testimonialIndex + 1);
+  });
+  testimonialRoot?.addEventListener('mouseenter', () => {
+    testimonialHovered = true;
+    stopTestimonialProgress();
+  });
+  testimonialRoot?.addEventListener('mouseleave', () => {
+    testimonialHovered = false;
+    playTestimonialProgress();
+  });
   renderTestimonial(0);
 
   function initWebGL(canvas) {

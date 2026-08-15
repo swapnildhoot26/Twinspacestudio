@@ -478,14 +478,16 @@ body.modal-open { overflow: hidden; }
 .u096{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; font-size: clamp(15px, 3.4vw, 18px); line-height: 1.85; font-weight: 400; color: rgb(74, 66, 56); max-width: 46ch; min-height: 5.55em; text-wrap: pretty}
 .u097{display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap}
 .u098{display: flex; align-items: center; gap: 14px}
-.u099{width: 46px; height: 46px; flex: 0 0 auto; border-radius: 50%; background-color: rgb(42, 36, 30); background-image: url("../images/external/725d17f9-65a1-4bea-9ec9-748e2066bccb.jpg"); background-size: cover; background-position: center 28%; box-shadow: rgba(42, 36, 30, 0.18) 0px 0px 0px 1px}
+.u099{width: 68px; height: 68px; flex: 0 0 auto; border-radius: 50%; background-color: rgb(42, 36, 30); background-image: url("../images/external/725d17f9-65a1-4bea-9ec9-748e2066bccb.jpg"); background-size: cover; background-position: center 28%; box-shadow: rgba(42, 36, 30, 0.14) 0px 0px 0px 1px, rgba(42, 36, 30, 0.16) 0px 6px 16px}
 .u100{display: block; margin-bottom: 4px; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase}
 .u101{display: block; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(138, 127, 112)}
 .u102{display: flex; align-items: center; gap: 16px}
-.u103{display: flex; gap: 7px}
-.u104{width: 22px; height: 22px; padding: 0px; border: 0px; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center}
-.u105{display: block; width: 20px; height: 2px; background: rgb(176, 141, 87); transition: background 400ms, width 400ms}
-.u106{display: block; width: 10px; height: 2px; background: rgba(42, 36, 30, 0.28); transition: background 400ms, width 400ms}
+.u103{display: flex; gap: 8px}
+.u104{width: 30px; height: 26px; padding: 0px; border: 0px; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center}
+.u104:hover .u105, .u104:hover .u106{background-color: rgba(42, 36, 30, 0.4)}
+.u105, .u106{display: block; width: 100%; height: 4px; border-radius: 2px; background-color: rgba(42, 36, 30, 0.16); background-image: linear-gradient(rgb(176, 141, 87), rgb(176, 141, 87)); background-repeat: no-repeat; background-size: 0% 100%; transition: background-color 250ms}
+.u105{background-size: 100% 100%}
+.u105.is-playing{transition: background-size linear}
 .u107{width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(42, 36, 30, 0.28); background: none; cursor: pointer; font-size: 12px}
 .u108{background: rgb(42, 36, 30); color: rgb(245, 240, 232)}
 .u109{display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); align-items: stretch}
