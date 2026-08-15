@@ -245,19 +245,19 @@
   const testimonials = [
     {
       heading: 'Designs that feel just right.',
-      text: 'Pooja understood exactly what we wanted and brought it to life beautifully. Her thoughtful planning, attention to detail, and perfect choice of colours and materials transformed our home into a space we absolutely love.',
+      text: 'Pooja and Dimple understood exactly what we wanted and brought it to life beautifully. Their thoughtful planning, attention to detail, and perfect choice of colours and materials transformed our home into a space we absolutely love.',
       name: 'Akshay & Radhika Soni', location: '3 BHK, Kharadi',
       image: 'assets/opt/c02.jpg', face: 'assets/opt/face-akshay-radhika.jpg'
     },
     {
       heading: 'Spaces with a story to tell.',
-      text: 'As someone who loves art, I wanted a home that felt personal, not just beautiful. Pooja understood that instinctively and created a space where every detail feels thoughtfully chosen, warm and truly ours.',
+      text: 'As someone who loves art, I wanted a home that felt personal, not just beautiful. Pooja and Dimple understood that instinctively and created a space where every detail feels thoughtfully chosen, warm and truly ours.',
       name: 'Chinmay Patil', location: '3 BHK, Dahanukar Colony, Kothrud',
       image: 'assets/opt/a05.jpg', face: 'assets/opt/face-chinmay.jpg'
     },
     {
       heading: 'Designed for today. Made for tomorrow.',
-      text: 'We wanted a home that felt luxurious for us, yet safe, fun and inspiring for our kids. Pooja perfectly balanced elegance with practicality, creating spaces where our family can live, play and make memories together.',
+      text: 'We wanted a home that felt luxurious for us, yet safe, fun and inspiring for our kids. Pooja and Dimple perfectly balanced elegance with practicality, creating spaces where our family can live, play and make memories together.',
       name: 'Sachin Sharma', location: '4 BHK, Escon, Kondhwa',
       image: 'assets/opt/b08.jpg', face: 'assets/opt/face-sachin.jpg'
     }
@@ -354,5 +354,38 @@
     observer.observe(canvas);
   } else if (canvas) {
     window.setTimeout(() => initWebGL(canvas), 1_000);
+  }
+
+  const statNumbers = [...document.querySelectorAll('[data-stat-number]')];
+  if (statNumbers.length) {
+    const animateStat = (el) => {
+      const target = parseFloat(el.dataset.statTarget);
+      const decimals = Number(el.dataset.statDecimals || 0);
+      const suffix = el.dataset.statSuffix || '';
+      if (reduceMotion) {
+        el.textContent = target.toFixed(decimals) + suffix;
+        return;
+      }
+      const duration = 1600;
+      const start = performance.now();
+      const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = (target * eased).toFixed(decimals) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    const statsGrid = document.querySelector('[data-stats-grid]');
+    if (statsGrid && 'IntersectionObserver' in window) {
+      const statsObserver = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        statsObserver.disconnect();
+        statNumbers.forEach(animateStat);
+      }, { threshold: 0.4 });
+      statsObserver.observe(statsGrid);
+    } else {
+      statNumbers.forEach(animateStat);
+    }
   }
 })();
