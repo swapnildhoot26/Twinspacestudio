@@ -399,11 +399,13 @@ body.modal-open { overflow: hidden; }
 .u026{position: relative; width: 100%; max-width: 1360px; margin: 0px auto; color: rgb(245, 240, 232)}
 .u027{font-family: "Cormorant Garamond", serif; font-weight: 300; font-size: clamp(40px, 8vw, 104px); line-height: 1.02; letter-spacing: -0.015em; margin: 0px; max-width: 15ch; text-wrap: balance}
 .u028{font-style: italic; color: rgb(216, 184, 132)}
-.u029{margin: clamp(20px, 3.4vw, 32px) 0px clamp(26px, 4vw, 38px); max-width: 44ch; font-size: clamp(14.5px, 3.4vw, 17px); line-height: 1.8; font-weight: 400; color: rgba(245, 240, 232, 0.86); text-wrap: pretty}
+.u029{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: clamp(20px, 3.4vw, 32px) 0px clamp(26px, 4vw, 38px); max-width: 44ch; font-size: clamp(14.5px, 3.4vw, 17px); line-height: 1.8; font-weight: 400; color: rgba(245, 240, 232, 0.86); text-wrap: pretty}
 .u030{display: flex; flex-wrap: wrap; gap: 12px}
-.u031{display: flex; align-items: center; gap: 9px; background: rgb(176, 141, 87); color: rgb(255, 255, 255); padding: 13px 22px; min-height: 44px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; transition: background 400ms, transform 400ms cubic-bezier(0.16, 1, 0.3, 1)}
+.u031{display: flex; align-items: center; gap: 9px; background: rgb(176, 141, 87); color: rgb(255, 255, 255); padding: 13px 22px; min-height: 44px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; transition: background 400ms, color 400ms, transform 400ms cubic-bezier(0.16, 1, 0.3, 1)}
+.u031:hover{background: rgb(154, 121, 71); color: rgb(255, 255, 255)}
 .u032{font-size: 12px}
-.u033{display: flex; align-items: center; border: 1px solid rgba(245, 240, 232, 0.7); color: rgb(245, 240, 232); padding: 13px 22px; min-height: 44px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; transition: background 400ms, color 400ms, transform 400ms cubic-bezier(0.16, 1, 0.3, 1)}
+.u033{display: flex; align-items: center; border: 1px solid rgba(245, 240, 232, 0.7); color: rgb(245, 240, 232); padding: 13px 22px; min-height: 44px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; transition: background 400ms, color 400ms, border-color 400ms, transform 400ms cubic-bezier(0.16, 1, 0.3, 1)}
+.u033:hover{background: rgb(245, 240, 232); border-color: rgb(245, 240, 232); color: rgb(42, 36, 30)}
 .u034{position: absolute; left: clamp(18px, 5vw, 64px); right: clamp(18px, 5vw, 64px); bottom: clamp(22px, 4vw, 40px); display: flex; align-items: center; justify-content: center; gap: 20px; color: rgba(245, 240, 232, 0.8)}
 .u035{display: flex; align-items: center; gap: 14px; color: inherit}
 .u036{width: 38px; height: 38px; border: 1px solid rgba(245, 240, 232, 0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; animation: 2.8s ease-in-out 0s infinite normal none running tss-bob}
@@ -415,7 +417,7 @@ body.modal-open { overflow: hidden; }
 .u042{background: rgb(237, 230, 218); border-bottom: 1px solid rgba(42, 36, 30, 0.1)}
 .u043{max-width: 1360px; margin: 0px auto; padding: clamp(26px, 4vw, 40px) clamp(18px, 5vw, 64px); display: grid; grid-template-columns: repeat(5, minmax(0px, 1fr)); gap: clamp(18px, 3vw, 28px)}
 .u044{text-align: center; padding: 6px 10px; border-left: 1px solid rgba(42, 36, 30, 0.12)}
-.u045{margin: 0px; font-family: "Cormorant Garamond", serif; font-weight: 400; font-size: clamp(26px, 4.4vw, 38px); line-height: 1}
+.u045{margin: 0px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 500; font-size: clamp(26px, 4.4vw, 38px); line-height: 1}
 .u046{font-size: 0.5em; color: rgb(176, 141, 87); vertical-align: 0.28em; margin-left: 2px}
 .u047{margin: 8px 0px 0px; font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgb(138, 127, 112)}
 .u048{padding: clamp(66px, 10vw, 132px) clamp(18px, 5vw, 64px); max-width: 1360px; margin: 0px auto}
@@ -423,13 +425,13 @@ body.modal-open { overflow: hidden; }
 .u050{font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: rgb(176, 141, 87); margin: 0px 0px 16px}
 .u051{font-family: "Cormorant Garamond", serif; font-weight: 300; font-size: clamp(28px, 4.6vw, 50px); line-height: 1.12; margin: 0px 0px 18px; text-wrap: balance}
 .u052{font-style: italic; color: rgb(138, 110, 62)}
-.u053{margin: 0px; font-size: 15px; line-height: 1.85; font-weight: 400; color: rgb(91, 83, 71); text-wrap: pretty}
+.u053{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; font-size: 15px; line-height: 1.85; font-weight: 400; color: rgb(91, 83, 71); text-wrap: pretty}
 .u054{display: grid; gap: 1px; background: rgb(245, 240, 232)}
 .u055{background: rgb(245, 240, 232); box-shadow: rgba(42, 36, 30, 0.14) 0px 0px 0px 1px; padding: clamp(20px, 2.2vw, 26px) clamp(18px, 2vw, 22px); min-height: 0px; display: flex; flex-direction: column; gap: 13px; transition: background 500ms}
 .u056{display: flex; align-items: center; justify-content: space-between; gap: 14px}
 .u057{font-family: "Cormorant Garamond", serif; font-size: 15px; color: rgb(176, 141, 87)}
 .u058{margin: 0px; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1.6}
-.u059{margin: 0px; font-size: 13.5px; line-height: 1.8; font-weight: 400; color: rgb(91, 83, 71); text-wrap: pretty}
+.u059{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; font-size: 13.5px; line-height: 1.8; font-weight: 400; color: rgb(91, 83, 71); text-wrap: pretty}
 .u060{position: relative; aspect-ratio: 1695 / 862; display: flex; align-items: center; background-color: rgb(237, 230, 218); background-image: url("../images/studio-philosophy.jpg"); background-size: 100% 100%; background-position: center center; overflow: hidden}
 .u061{position: absolute; inset: -8%; pointer-events: none; mix-blend-mode: multiply; opacity: 0.5; animation: 17s ease-in-out 0s infinite alternate none running tss-sway; background: radial-gradient(38% 30% at 22% 26%, rgba(58, 50, 42, 0.42) 0%, rgba(58, 50, 42, 0) 70%), radial-gradient(30% 26% at 62% 18%, rgba(58, 50, 42, 0.3) 0%, rgba(58, 50, 42, 0) 72%), radial-gradient(34% 40% at 44% 70%, rgba(58, 50, 42, 0.26) 0%, rgba(58, 50, 42, 0) 74%)}
 .u062{position: absolute; inset: 0px; background: linear-gradient(270deg, rgba(245, 240, 232, 0.82) 0%, rgba(245, 240, 232, 0.5) 44%, rgba(245, 240, 232, 0) 76%)}
@@ -441,11 +443,11 @@ body.modal-open { overflow: hidden; }
 .u068{position: relative; max-width: 1360px; margin: 0px auto; display: grid; gap: clamp(30px, 5vw, 72px)}
 .u069{font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: rgb(216, 184, 132); margin: 0px 0px 20px}
 .u070{font-family: "Cormorant Garamond", serif; font-weight: 300; font-size: clamp(28px, 5.2vw, 50px); line-height: 1.14; margin: 0px 0px 22px; max-width: 16ch}
-.u071{margin: 0px; max-width: 38ch; font-size: 14px; line-height: 1.85; font-weight: 400; color: rgba(245, 240, 232, 0.72)}
+.u071{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; max-width: 38ch; font-size: 14px; line-height: 1.85; font-weight: 400; color: rgba(245, 240, 232, 0.72)}
 .u072{min-width: 0px; display: grid; grid-auto-rows: 1fr; gap: clamp(14px, 1.6vw, 20px)}
 .u073{display: flex; flex-direction: column; gap: 13px; padding: clamp(20px, 2vw, 26px); border: 1px solid rgba(245, 240, 232, 0.2); background: rgba(245, 240, 232, 0.03); transition: background 500ms, border-color 500ms}
 .u074{margin: 0px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1.6}
-.u075{margin: 0px; font-size: 13.5px; line-height: 1.8; font-weight: 400; color: rgba(245, 240, 232, 0.8); text-wrap: pretty}
+.u075{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; font-size: 13.5px; line-height: 1.8; font-weight: 400; color: rgba(245, 240, 232, 0.8); text-wrap: pretty}
 .u076{font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: rgb(176, 141, 87); margin: 0px 0px 20px}
 .u077{display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end; justify-content: space-between; margin-bottom: clamp(26px, 4vw, 44px)}
 .u078{max-width: 56ch}
@@ -463,10 +465,15 @@ body.modal-open { overflow: hidden; }
 .u090{background: rgb(237, 230, 218)}
 .u091{display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); align-items: stretch}
 .u092{position: relative; min-height: clamp(260px, 42vw, 460px); background-color: rgb(216, 205, 187); background-image: url("../images/external/c724a564-0656-4a4c-9467-b3e123e8f91a.jpg"); background-size: cover; background-position: center center; overflow: hidden}
-.u093{padding: clamp(34px, 6vw, 80px) clamp(20px, 5vw, 64px); display: flex; flex-direction: column; justify-content: center; gap: clamp(20px, 3vw, 30px)}
+.u093{box-sizing: border-box; padding: clamp(34px, 6vw, 80px) clamp(20px, 5vw, 64px); display: flex; flex-direction: column; justify-content: center; gap: clamp(20px, 3vw, 30px)}
+@media (min-width: 700px) {
+  .u091{height: clamp(560px, 46vw, 640px)}
+  .u092{height: 100%}
+  .u093{height: 100%; overflow: hidden}
+}
 .u094{margin: 0px; font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: rgb(176, 141, 87)}
 .u095{font-family: "Cormorant Garamond", serif; font-weight: 300; font-size: clamp(26px, 4.6vw, 42px); line-height: 1.16; margin: 0px; max-width: 18ch; min-height: 2.32em}
-.u096{margin: 0px; font-size: clamp(15px, 3.4vw, 18px); line-height: 1.85; font-weight: 400; color: rgb(74, 66, 56); max-width: 46ch; min-height: 5.55em; text-wrap: pretty}
+.u096{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; font-size: clamp(15px, 3.4vw, 18px); line-height: 1.85; font-weight: 400; color: rgb(74, 66, 56); max-width: 46ch; min-height: 5.55em; text-wrap: pretty}
 .u097{display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap}
 .u098{display: flex; align-items: center; gap: 14px}
 .u099{width: 46px; height: 46px; flex: 0 0 auto; border-radius: 50%; background-color: rgb(42, 36, 30); background-image: url("../images/external/725d17f9-65a1-4bea-9ec9-748e2066bccb.jpg"); background-size: cover; background-position: center 28%; box-shadow: rgba(42, 36, 30, 0.18) 0px 0px 0px 1px}
@@ -483,7 +490,7 @@ body.modal-open { overflow: hidden; }
 .u110{padding: clamp(40px, 7vw, 96px) clamp(20px, 5vw, 64px); display: flex; flex-direction: column; justify-content: center; gap: clamp(18px, 3vw, 28px)}
 .u111{margin: 0px; font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: rgb(216, 184, 132)}
 .u112{font-family: "Cormorant Garamond", serif; font-weight: 300; font-size: clamp(30px, 5.6vw, 58px); line-height: 1.08; margin: 0px; max-width: 14ch}
-.u113{margin: 0px; max-width: 44ch; font-size: 15px; line-height: 1.9; font-weight: 400; color: rgba(245, 240, 232, 0.76); text-wrap: pretty}
+.u113{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; max-width: 44ch; font-size: 15px; line-height: 1.9; font-weight: 400; color: rgba(245, 240, 232, 0.76); text-wrap: pretty}
 .u114{align-self: flex-start; display: flex; align-items: center; gap: 9px; color: rgb(245, 240, 232); font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; border-bottom: 1px solid rgba(245, 240, 232, 0.5); padding-bottom: 7px}
 .u115{position: relative; min-height: clamp(280px, 46vw, 520px); background: linear-gradient(150deg, rgb(74, 66, 56), rgb(42, 36, 30)); overflow: hidden}
 .u116{width:100%; height:100%; object-fit:cover; display:block}
@@ -492,12 +499,13 @@ body.modal-open { overflow: hidden; }
 .u119{font-family: "Cormorant Garamond", serif; font-weight: 300; font-size: clamp(26px, 5vw, 46px); line-height: 1.12; margin: 0px; max-width: 22ch}
 .u120{display: flex; flex-wrap: wrap; gap: 12px; align-items: center}
 .u121{display: flex; align-items: center; border: 1px solid rgba(42, 36, 30, 0.28); padding: 13px 22px; min-height: 44px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; transition: background 350ms}
-.u122{display: flex; align-items: center; gap: 9px; background: rgb(176, 141, 87); color: rgb(255, 255, 255); padding: 13px 24px; min-height: 44px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; transition: background 400ms, transform 400ms cubic-bezier(0.16, 1, 0.3, 1)}
+.u122{display: flex; align-items: center; gap: 9px; background: rgb(176, 141, 87); color: rgb(255, 255, 255); padding: 13px 24px; min-height: 44px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; transition: background 400ms, color 400ms, transform 400ms cubic-bezier(0.16, 1, 0.3, 1)}
+.u122:hover{background: rgb(154, 121, 71); color: rgb(255, 255, 255)}
 .u123{background: rgb(237, 230, 218); border-top: 1px solid rgba(42, 36, 30, 0.12); padding: clamp(40px, 6vw, 72px) clamp(18px, 5vw, 64px) 22px}
 .u124{max-width: 1360px; margin: 0px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: clamp(26px, 4vw, 52px)}
 .u125{display: flex; flex-direction: column; gap: 16px}
 .u126{height: 92px; width: auto; align-self: flex-start}
-.u127{margin: 0px; max-width: 30ch; font-size: 12.5px; line-height: 1.85; font-weight: 400; color: rgb(91, 83, 71)}
+.u127{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; max-width: 30ch; font-size: 12.5px; line-height: 1.85; font-weight: 400; color: rgb(91, 83, 71)}
 .u128{display: flex; gap: 10px}
 .u129{width: 38px; height: 38px; border: 1px solid rgba(42, 36, 30, 0.24); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9.5px; letter-spacing: 0.08em; transition: background 350ms, color 350ms}
 .u129b{display: flex; align-items: center; gap: 7px; padding: 7px 16px; background: rgb(42, 36, 30); border: 1px solid rgb(42, 36, 30); border-radius: 999px; font-size: 9.5px; letter-spacing: 0.08em; color: rgb(245, 240, 232); transition: background 350ms}
@@ -505,13 +513,14 @@ body.modal-open { overflow: hidden; }
 .u130{display: flex; flex-direction: column; gap: 11px}
 .u131{margin: 0px 0px 5px; font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(138, 127, 112)}
 .u132{font-size: 13px; font-weight: 400}
-.u133{margin: 0px; font-size: 13px; line-height: 1.85; font-weight: 400; color: rgb(91, 83, 71)}
+.u133{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; font-size: 13px; line-height: 1.85; font-weight: 400; color: rgb(91, 83, 71)}
 .u134{max-width: 1360px; margin: clamp(32px, 5vw, 56px) auto 0px; padding-top: 20px; border-top: 1px solid rgba(42, 36, 30, 0.12); display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; font-size: 9.5px; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(138, 127, 112)}
 .u135{display: flex; gap: 20px}
 .u136{color: inherit}
 .u137{position: fixed; left: 0px; right: 0px; bottom: 0px; z-index: 45; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(42, 36, 30, 0.16); box-shadow: rgba(42, 36, 30, 0.16) 0px -10px 28px; padding-bottom: env(safe-area-inset-bottom)}
 .u138{display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; background: rgb(245, 240, 232); color: rgb(42, 36, 30); font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase}
-.u139{display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; background: rgb(176, 141, 87); color: rgb(255, 255, 255); font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase}
+.u139{display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; background: rgb(176, 141, 87); color: rgb(255, 255, 255); font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; transition: background 400ms, color 400ms}
+.u139:hover{background: rgb(154, 121, 71); color: rgb(255, 255, 255)}
 .u140{position: fixed; inset: 0px; z-index: 60; background: rgb(245, 240, 232); overflow-y: auto}
 .u141{position: sticky; top: 0px; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px clamp(18px, 5vw, 54px); background: rgba(245, 240, 232, 0.92); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(42, 36, 30, 0.12)}
 .u142{display: flex; align-items: center; gap: 10px; min-height: 44px; background: none; border: 0px; cursor: pointer; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgb(42, 36, 30)}
@@ -524,8 +533,8 @@ body.modal-open { overflow: hidden; }
 .u149{display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: clamp(24px, 4vw, 64px); margin-bottom: clamp(34px, 6vw, 72px)}
 .u150{margin: 0px 0px 18px; font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: rgb(176, 141, 87)}
 .u151{margin: 0px 0px 20px; font-family: "Cormorant Garamond", serif; font-size: clamp(20px, 4vw, 30px); line-height: 1.4; font-weight: 400; color: rgb(42, 36, 30); text-wrap: pretty}
-.u152{margin: 0px 0px 18px; font-size: 14.5px; line-height: 1.9; font-weight: 400; color: rgb(91, 83, 71); text-wrap: pretty}
-.u153{margin: 0px; font-size: 14.5px; line-height: 1.9; font-weight: 400; color: rgb(91, 83, 71); text-wrap: pretty}
+.u152{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px 0px 18px; font-size: 14.5px; line-height: 1.9; font-weight: 400; color: rgb(91, 83, 71); text-wrap: pretty}
+.u153{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; font-size: 14.5px; line-height: 1.9; font-weight: 400; color: rgb(91, 83, 71); text-wrap: pretty}
 .u154{display: flex; flex-direction: column; gap: 1px; background: rgba(42, 36, 30, 0.14); border: 1px solid rgba(42, 36, 30, 0.14); align-self: start}
 .u155{background: rgb(245, 240, 232); padding: 18px 20px; display: flex; justify-content: space-between; gap: 18px; align-items: baseline}
 .u156{font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: rgb(138, 127, 112)}
@@ -542,10 +551,11 @@ body.modal-open { overflow: hidden; }
 .u167{display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: clamp(18px, 3vw, 32px); margin-bottom: clamp(34px, 6vw, 64px)}
 .u168{border-top: 1px solid rgba(42, 36, 30, 0.18); padding-top: 18px; display: flex; flex-direction: column; gap: 10px}
 .u169{margin: 0px; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase}
-.u170{margin: 0px; font-size: 13px; line-height: 1.8; font-weight: 400; color: rgb(91, 83, 71); text-wrap: pretty}
+.u170{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; font-size: 13px; line-height: 1.8; font-weight: 400; color: rgb(91, 83, 71); text-wrap: pretty}
 .u171{margin: 0px 0px clamp(34px, 5vw, 60px); padding: clamp(26px, 4vw, 44px); background: rgb(237, 230, 218); font-family: "Cormorant Garamond", serif; font-size: clamp(19px, 3.8vw, 28px); line-height: 1.5; font-weight: 400; color: rgb(42, 36, 30); max-width: 38ch; text-wrap: pretty}
 .u172{display: flex; align-items: center; gap: 14px; margin-top: 22px; font-family: Jost, sans-serif}
-.u173{display: flex; align-items: center; gap: 9px; background: rgb(176, 141, 87); color: rgb(255, 255, 255); padding: 14px 24px; min-height: 46px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase}
+.u173{display: flex; align-items: center; gap: 9px; background: rgb(176, 141, 87); color: rgb(255, 255, 255); padding: 14px 24px; min-height: 46px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; transition: background 400ms, color 400ms}
+.u173:hover{background: rgb(154, 121, 71); color: rgb(255, 255, 255)}
 .u174{display: flex; align-items: center; border: 1px solid rgba(42, 36, 30, 0.3); background: none; color: rgb(42, 36, 30); padding: 14px 24px; min-height: 46px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer}
 .u175{position: relative; height: clamp(280px, 56vh, 660px); background-color: rgb(216, 205, 187); background-image: url("../opt/b05.jpg"); background-size: cover; background-position: center center; overflow: hidden}
 .u176{width: 46px; height: 46px; flex: 0 0 auto; border-radius: 50%; background-color: rgb(42, 36, 30); background-image: url("../images/external/0a4358de-be3b-40b7-b53c-53215ecd2d2e.jpg"); background-size: cover; background-position: center 28%; box-shadow: rgba(42, 36, 30, 0.18) 0px 0px 0px 1px}
@@ -559,18 +569,18 @@ body.modal-open { overflow: hidden; }
 .u184{max-width: 1160px; margin: 0px auto}
 .u185{margin: 0px 0px 16px; font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: rgb(216, 184, 132)}
 .u186{margin: 0px 0px 22px; font-family: "Cormorant Garamond", serif; font-weight: 300; font-size: clamp(34px, 7vw, 80px); line-height: 1.04; max-width: 16ch}
-.u187{margin: 0px; max-width: 52ch; font-size: clamp(15px, 2.6vw, 18px); line-height: 1.85; font-weight: 400; color: rgba(245, 240, 232, 0.78); text-wrap: pretty}
+.u187{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; max-width: 52ch; font-size: clamp(15px, 2.6vw, 18px); line-height: 1.85; font-weight: 400; color: rgba(245, 240, 232, 0.78); text-wrap: pretty}
 .u188{max-width: 1160px; margin: 0px auto; padding: clamp(40px, 7vw, 96px) clamp(20px, 5vw, 64px) clamp(60px, 9vw, 120px)}
 .u189{display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: clamp(26px, 4vw, 64px); margin-bottom: clamp(40px, 6vw, 84px)}
 .u190{margin: 0px 0px 20px; font-family: "Cormorant Garamond", serif; font-size: clamp(20px, 3.6vw, 30px); line-height: 1.42; font-weight: 400; text-wrap: pretty}
 .u191{position: relative; min-height: clamp(280px, 42vw, 460px); background: linear-gradient(150deg, rgb(227, 218, 203), rgb(201, 189, 169)); overflow: hidden}
 .u192{margin: 0px 0px 24px; font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: rgb(176, 141, 87)}
 .u193{display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: clamp(18px, 3vw, 32px); margin-bottom: clamp(40px, 6vw, 84px)}
-.u194{margin: 0px; font-size: 13.5px; line-height: 1.85; font-weight: 400; color: rgb(91, 83, 71); text-wrap: pretty}
+.u194{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; font-size: 13.5px; line-height: 1.85; font-weight: 400; color: rgb(91, 83, 71); text-wrap: pretty}
 .u195{display: flex; flex-direction: column; margin-bottom: clamp(40px, 6vw, 84px)}
 .u196{display: flex; flex-wrap: wrap; gap: 8px 26px; padding: 16px 0px; border-top: 1px solid rgba(42, 36, 30, 0.14)}
 .u197{min-width: 5ch; font-family: "Cormorant Garamond", serif; font-size: 19px; color: rgb(176, 141, 87)}
-.u198{flex: 1 1 260px; font-size: 14px; line-height: 1.85; color: rgb(91, 83, 71)}
+.u198{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; flex: 1 1 260px; font-size: 14px; line-height: 1.85; color: rgb(91, 83, 71)}
 .u199{display: flex; flex-wrap: wrap; gap: 8px 26px; padding: 16px 0px; border-top: 1px solid rgba(42, 36, 30, 0.14); border-bottom: 1px solid rgba(42, 36, 30, 0.14)}
 .u200{position: fixed; inset: 0px; z-index: 90; background: rgba(20, 17, 14, 0.96); display: flex; flex-direction: column}
 .u201{display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px clamp(14px, 3vw, 28px); color: rgb(245, 240, 232); flex: 0 0 auto}

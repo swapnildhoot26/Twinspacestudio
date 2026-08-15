@@ -228,7 +228,7 @@
   mobileHero.addEventListener('change', () => renderHero(heroIndex));
   if (heroSlides.length) renderHero(0);
   if (!reduceMotion && heroSlides.length) {
-    window.setInterval(() => renderHero((heroIndex + 1) % heroSlides.length), 6760);
+    window.setInterval(() => renderHero((heroIndex + 1) % heroSlides.length), 8788);
   }
 
   const hero = document.querySelector('[data-hero]');
@@ -244,22 +244,22 @@
 
   const testimonials = [
     {
-      heading: 'Spaces that make a difference.',
-      text: 'They understood what we wanted before we could explain it. Every drawing came back closer to the home we had in our heads.',
-      name: 'Aniket & Pooja', location: '4 BHK, Koregaon Park',
-      image: localImage('c724a564-0656-4a4c-9467-b3e123e8f91a'), face: localImage('725d17f9-65a1-4bea-9ec9-748e2066bccb')
+      heading: 'Designs that feel just right.',
+      text: 'Pooja understood exactly what we wanted and brought it to life beautifully. Her thoughtful planning, attention to detail, and perfect choice of colours and materials transformed our home into a space we absolutely love.',
+      name: 'Akshay & Radhika Soni', location: '3 BHK, Kharadi',
+      image: 'assets/opt/c07.jpg', face: ''
     },
     {
-      heading: 'A home that works at 5am.',
-      text: 'I work nights, so they designed the whole flat around one person moving quietly at 5am — and it works exactly like that, every single shift.',
-      name: 'Dr. Meera S.', location: '3 BHK, Kothrud',
-      image: localImage('5614cf90-4325-48c2-ba7a-3afe47611fb4'), face: localImage('0a4358de-be3b-40b7-b53c-53215ecd2d2e')
+      heading: 'Spaces with a story to tell.',
+      text: 'As someone who loves art, I wanted a home that felt personal, not just beautiful. Pooja understood that instinctively and created a space where every detail feels thoughtfully chosen, warm and truly ours.',
+      name: 'Chinmay Patil', location: '3 BHK, Dahanukar Colony, Kothrud',
+      image: 'assets/opt/a09.jpg', face: ''
     },
     {
-      heading: 'Not one rupee of surprise.',
-      text: 'Quote on day one, the same number on handover day, and a dated plan we could hold them to. As a founder myself, that is what I still talk about.',
-      name: 'Karthik R.', location: 'Villa, Baner',
-      image: localImage('6016ad09-8a11-483e-a18e-319237c8c6db'), face: localImage('508602b4-eeb0-4882-9643-30479f059948')
+      heading: 'Designed for today. Made for tomorrow.',
+      text: 'We wanted a home that felt luxurious for us, yet safe, fun and inspiring for our kids. Pooja perfectly balanced elegance with practicality, creating spaces where our family can live, play and make memories together.',
+      name: 'Sachin Sharma', location: '4 BHK, Escon, Kondhwa',
+      image: 'assets/opt/b02.jpg', face: ''
     }
   ];
   const testimonialRoot = document.querySelector('[data-testimonials]');
@@ -274,7 +274,7 @@
     testimonialRoot.querySelector('[data-testimonial-location]').textContent = item.location;
     testimonialRoot.querySelector('[data-testimonial-image]').style.backgroundImage = `url("${item.image}")`;
     testimonialRoot.querySelector('[data-testimonial-image]').setAttribute('aria-label', `Home of ${item.name}`);
-    testimonialRoot.querySelector('[data-testimonial-face]').style.backgroundImage = `url("${item.face}")`;
+    testimonialRoot.querySelector('[data-testimonial-face]').style.backgroundImage = item.face ? `url("${item.face}")` : 'none';
     testimonialRoot.querySelectorAll('[data-testimonial-dot]').forEach((dot, dotIndex) => {
       const line = dot.firstElementChild || dot;
       line.style.width = dotIndex === testimonialIndex ? '20px' : '10px';
