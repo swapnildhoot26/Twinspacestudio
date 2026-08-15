@@ -247,13 +247,13 @@
       heading: 'Designs that feel just right.',
       text: 'Pooja understood exactly what we wanted and brought it to life beautifully. Her thoughtful planning, attention to detail, and perfect choice of colours and materials transformed our home into a space we absolutely love.',
       name: 'Akshay & Radhika Soni', location: '3 BHK, Kharadi',
-      image: 'assets/opt/c07.jpg', face: 'assets/opt/face-akshay-radhika.jpg'
+      image: 'assets/opt/c02.jpg', face: 'assets/opt/face-akshay-radhika.jpg'
     },
     {
       heading: 'Spaces with a story to tell.',
       text: 'As someone who loves art, I wanted a home that felt personal, not just beautiful. Pooja understood that instinctively and created a space where every detail feels thoughtfully chosen, warm and truly ours.',
       name: 'Chinmay Patil', location: '3 BHK, Dahanukar Colony, Kothrud',
-      image: 'assets/opt/a09.jpg', face: 'assets/opt/face-chinmay.jpg'
+      image: 'assets/opt/a05.jpg', face: 'assets/opt/face-chinmay.jpg'
     },
     {
       heading: 'Designed for today. Made for tomorrow.',
