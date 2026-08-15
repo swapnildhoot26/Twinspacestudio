@@ -13,7 +13,7 @@
   let gallery = [];
   let galleryIndex = 0;
 
-  function openDialog(dialog, trigger) {
+  function openDialog(dialog, trigger, { fromPopState = false } = {}) {
     if (!dialog) return;
     returnFocus = trigger || document.activeElement;
     activeDialog = dialog;
@@ -21,15 +21,25 @@
     body.classList.add('modal-open');
     dialog.scrollTop = 0;
     dialog.querySelector('button, a')?.focus({ preventScroll: true });
+    if (!fromPopState) history.pushState({ twinspaceModal: 'dialog' }, '');
   }
 
-  function closeDialog(dialog, restoreFocus = true) {
+  function closeDialog(dialog, restoreFocus = true, { fromPopState = false } = {}) {
     if (!dialog) return;
     dialog.hidden = true;
     if (activeDialog === dialog) activeDialog = null;
     if (!activeDialog && (!lightbox || lightbox.hidden)) body.classList.remove('modal-open');
     if (restoreFocus) returnFocus?.focus?.({ preventScroll: true });
+    if (!fromPopState && history.state?.twinspaceModal) history.back();
   }
+
+  window.addEventListener('popstate', () => {
+    if (lightbox && !lightbox.hidden) {
+      closeLightbox({ fromPopState: true });
+    } else if (activeDialog) {
+      closeDialog(activeDialog, true, { fromPopState: true });
+    }
+  });
 
   document.querySelectorAll('[data-open-project]').forEach((card) => {
     const open = () => openDialog(projectDialogs[Number(card.dataset.openProject)], card);
@@ -47,8 +57,9 @@
   projectDialogs.forEach((dialog, index) => {
     dialog.querySelector('[data-close-project]')?.addEventListener('click', () => closeDialog(dialog));
     dialog.querySelector('[data-next-project]')?.addEventListener('click', () => {
-      closeDialog(dialog, false);
-      openDialog(projectDialogs[(index + 1) % projectDialogs.length], returnFocus);
+      closeDialog(dialog, false, { fromPopState: true });
+      openDialog(projectDialogs[(index + 1) % projectDialogs.length], returnFocus, { fromPopState: true });
+      history.replaceState({ twinspaceModal: 'dialog' }, '');
     });
     dialog.querySelectorAll('figure [role="button"]').forEach((button, itemIndex) => {
       const open = () => openLightbox(dialog, itemIndex, button);
@@ -112,7 +123,7 @@
     }
   }
 
-  function openLightbox(dialog, index, trigger) {
+  function openLightbox(dialog, index, trigger, { fromPopState = false } = {}) {
     if (!lightbox) return;
     gallery = galleryItems(dialog);
     galleryIndex = index;
@@ -121,16 +132,18 @@
     body.classList.add('modal-open');
     renderLightbox();
     lightbox.querySelector('[data-close-lightbox]')?.focus({ preventScroll: true });
+    if (!fromPopState) history.pushState({ twinspaceModal: 'lightbox' }, '');
   }
 
-  function closeLightbox() {
+  function closeLightbox({ fromPopState = false } = {}) {
     if (!lightbox) return;
     lightbox.hidden = true;
     if (!activeDialog) body.classList.remove('modal-open');
     returnFocus?.focus?.({ preventScroll: true });
+    if (!fromPopState && history.state?.twinspaceModal) history.back();
   }
 
-  lightbox?.querySelector('[data-close-lightbox]')?.addEventListener('click', closeLightbox);
+  lightbox?.querySelector('[data-close-lightbox]')?.addEventListener('click', () => closeLightbox());
   lightbox?.querySelector('[data-previous-image]')?.addEventListener('click', () => {
     galleryIndex = (galleryIndex - 1 + gallery.length) % gallery.length;
     renderLightbox();
