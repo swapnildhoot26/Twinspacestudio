@@ -577,11 +577,6 @@ body.modal-open { overflow: hidden; }
 .u192{margin: 0px 0px 24px; font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: rgb(176, 141, 87)}
 .u193{display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: clamp(18px, 3vw, 32px); margin-bottom: clamp(40px, 6vw, 84px)}
 .u194{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; font-size: 13.5px; line-height: 1.85; font-weight: 400; color: rgb(91, 83, 71); text-wrap: pretty}
-.u195{display: flex; flex-direction: column; margin-bottom: clamp(40px, 6vw, 84px)}
-.u196{display: flex; flex-wrap: wrap; gap: 8px 26px; padding: 16px 0px; border-top: 1px solid rgba(42, 36, 30, 0.14)}
-.u197{min-width: 5ch; font-family: "Cormorant Garamond", serif; font-size: 19px; color: rgb(176, 141, 87)}
-.u198{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; flex: 1 1 260px; font-size: 14px; line-height: 1.85; color: rgb(91, 83, 71)}
-.u199{display: flex; flex-wrap: wrap; gap: 8px 26px; padding: 16px 0px; border-top: 1px solid rgba(42, 36, 30, 0.14); border-bottom: 1px solid rgba(42, 36, 30, 0.14)}
 .u200{position: fixed; inset: 0px; z-index: 90; background: rgba(20, 17, 14, 0.96); display: flex; flex-direction: column}
 .u201{display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px clamp(14px, 3vw, 28px); color: rgb(245, 240, 232); flex: 0 0 auto}
 .u202{font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245, 240, 232, 0.6)}
