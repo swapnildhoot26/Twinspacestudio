@@ -350,7 +350,7 @@ body.modal-open { overflow: hidden; }
 [data-navpill]:hover { background:#C9A46A !important; border-color:#C9A46A !important; color:#fff !important; }
 [data-services-grid] > div:hover { background:#EDE6DA; }
 [data-process-grid] > div:hover { background:rgba(245,240,232,.07); border-color:rgba(216,184,132,.5) !important; }
-[data-testimonials] button:hover, footer a[aria-label]:hover { background:#2A241E !important; color:#F5F0E8 !important; }
+[data-testimonials] .u107:hover, footer a[aria-label]:hover { background:#2A241E !important; color:#F5F0E8 !important; }
 [data-project-dialog], [data-story-dialog], [data-lightbox] { overscroll-behavior:contain; }
 #founders-portrait { position:absolute; inset:0; }
 [data-mobile-menu] {
@@ -434,7 +434,7 @@ body.modal-open { overflow: hidden; }
 .u057{font-family: "Cormorant Garamond", serif; font-size: 15px; color: rgb(176, 141, 87)}
 .u058{margin: 0px; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1.6}
 .u059{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; font-size: 13.5px; line-height: 1.8; font-weight: 400; color: rgb(91, 83, 71); text-wrap: pretty}
-.u060{position: relative; aspect-ratio: 1695 / 862; display: flex; align-items: center; background-color: rgb(237, 230, 218); background-image: url("../images/studio-philosophy.jpg"); background-size: 100% 100%; background-position: center center; overflow: hidden}
+.u060{position: relative; aspect-ratio: 1695 / 862; display: flex; align-items: center; background-color: rgb(237, 230, 218); background-image: url("../images/studio-philosophy.jpg"); background-size: 100% 100%; background-position: center center; overflow: hidden; margin-bottom: -1px}
 .u061{position: absolute; inset: -8%; pointer-events: none; mix-blend-mode: multiply; opacity: 0.5; animation: 17s ease-in-out 0s infinite alternate none running tss-sway; background: radial-gradient(38% 30% at 22% 26%, rgba(58, 50, 42, 0.42) 0%, rgba(58, 50, 42, 0) 70%), radial-gradient(30% 26% at 62% 18%, rgba(58, 50, 42, 0.3) 0%, rgba(58, 50, 42, 0) 72%), radial-gradient(34% 40% at 44% 70%, rgba(58, 50, 42, 0.26) 0%, rgba(58, 50, 42, 0) 74%)}
 .u062{position: absolute; inset: 0px; background: linear-gradient(270deg, rgba(245, 240, 232, 0.82) 0%, rgba(245, 240, 232, 0.5) 44%, rgba(245, 240, 232, 0) 76%)}
 .u063{position: relative; width: 100%; max-width: 1360px; margin: 0px auto; padding: clamp(30px, 5vw, 60px) clamp(18px, 5vw, 64px); display: flex; align-items: flex-end; justify-content: flex-end; text-align: right; color: rgb(42, 36, 30)}

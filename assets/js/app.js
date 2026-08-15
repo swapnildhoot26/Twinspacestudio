@@ -300,7 +300,6 @@
   const canHover = window.matchMedia('(hover: hover)').matches;
   let testimonialIndex = 0;
   let testimonialTimer = null;
-  let testimonialAutoplay = true;
   let testimonialHovered = false;
   let testimonialTransitioning = false;
 
@@ -324,7 +323,7 @@
       clearTimeout(testimonialTimer);
       testimonialTimer = null;
     }
-    if (!testimonialAutoplay || testimonialHovered || !testimonialRoot) {
+    if (testimonialHovered || !testimonialRoot) {
       setTestimonialRing(0, false);
       return;
     }
@@ -387,17 +386,14 @@
   }
 
   testimonialRoot?.querySelectorAll('[data-testimonial-dot]').forEach((dot, index) => dot.addEventListener('click', () => {
-    testimonialAutoplay = false;
     stopTestimonialProgress();
     renderTestimonial(index);
   }));
   testimonialRoot?.querySelector('[aria-label="Previous testimonial"]')?.addEventListener('click', () => {
-    testimonialAutoplay = false;
     stopTestimonialProgress();
     renderTestimonial(testimonialIndex - 1);
   });
   testimonialRoot?.querySelector('[aria-label="Next testimonial"]')?.addEventListener('click', () => {
-    testimonialAutoplay = false;
     stopTestimonialProgress();
     renderTestimonial(testimonialIndex + 1);
   });
