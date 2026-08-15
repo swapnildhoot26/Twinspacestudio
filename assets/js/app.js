@@ -284,6 +284,7 @@
   testimonialRoot?.querySelectorAll('[data-testimonial-dot]').forEach((dot, index) => dot.addEventListener('click', () => renderTestimonial(index)));
   testimonialRoot?.querySelector('[aria-label="Previous testimonial"]')?.addEventListener('click', () => renderTestimonial(testimonialIndex - 1));
   testimonialRoot?.querySelector('[aria-label="Next testimonial"]')?.addEventListener('click', () => renderTestimonial(testimonialIndex + 1));
+  renderTestimonial(0);
 
   function initWebGL(canvas) {
     const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false });
