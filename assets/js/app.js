@@ -295,17 +295,24 @@
   ];
   const testimonialRoot = document.querySelector('[data-testimonials]');
   const TESTIMONIAL_MS = 5000;
+  const TESTIMONIAL_TRANSITION_MS = 700;
+  const TESTIMONIAL_RING_CIRCUMFERENCE = 220;
+  const canHover = window.matchMedia('(hover: hover)').matches;
   let testimonialIndex = 0;
   let testimonialTimer = null;
   let testimonialAutoplay = true;
   let testimonialHovered = false;
+  let testimonialTransitioning = false;
+
+  function setTestimonialRing(ratio, animate) {
+    const ring = testimonialRoot?.querySelector('[data-testimonial-ring]');
+    if (!ring) return;
+    ring.style.transition = animate ? `stroke-dashoffset ${TESTIMONIAL_MS}ms linear` : 'none';
+    ring.style.strokeDashoffset = String(TESTIMONIAL_RING_CIRCUMFERENCE * (1 - ratio));
+  }
 
   function stopTestimonialProgress() {
-    const active = testimonialRoot?.querySelector('[data-testimonial-dot][aria-current="true"] > *');
-    if (active) {
-      active.classList.remove('is-playing');
-      active.style.transitionDuration = '';
-    }
+    setTestimonialRing(0, false);
     if (testimonialTimer) {
       clearTimeout(testimonialTimer);
       testimonialTimer = null;
@@ -313,23 +320,23 @@
   }
 
   function playTestimonialProgress() {
-    stopTestimonialProgress();
-    if (!testimonialAutoplay || testimonialHovered || reduceMotion || !testimonialRoot) return;
-    const active = testimonialRoot.querySelector('[data-testimonial-dot][aria-current="true"] > *');
-    if (active) {
-      active.style.backgroundSize = '0% 100%';
-      void active.offsetWidth;
-      active.classList.add('is-playing');
-      active.style.transitionDuration = `${TESTIMONIAL_MS}ms`;
-      active.style.backgroundSize = '100% 100%';
+    if (testimonialTimer) {
+      clearTimeout(testimonialTimer);
+      testimonialTimer = null;
+    }
+    if (!testimonialAutoplay || testimonialHovered || !testimonialRoot) {
+      setTestimonialRing(0, false);
+      return;
+    }
+    setTestimonialRing(0, false);
+    if (!reduceMotion) {
+      void testimonialRoot.offsetWidth;
+      setTestimonialRing(1, true);
     }
     testimonialTimer = setTimeout(() => renderTestimonial(testimonialIndex + 1), TESTIMONIAL_MS);
   }
 
-  function renderTestimonial(index) {
-    if (!testimonialRoot) return;
-    testimonialIndex = (index + testimonials.length) % testimonials.length;
-    const item = testimonials[testimonialIndex];
+  function applyTestimonialContent(item) {
     testimonialRoot.querySelector('[data-testimonial-heading]').textContent = item.heading;
     testimonialRoot.querySelector('[data-testimonial-quote]').textContent = `“${item.text}”`;
     testimonialRoot.querySelector('[data-testimonial-name]').textContent = item.name;
@@ -341,34 +348,70 @@
       const line = dot.firstElementChild || dot;
       const active = dotIndex === testimonialIndex;
       dot.setAttribute('aria-current', active ? 'true' : 'false');
-      line.classList.remove('is-playing');
-      line.style.transitionDuration = '';
-      line.style.backgroundSize = active ? '100% 100%' : '0% 100%';
+      line.classList.toggle('u105', active);
+      line.classList.toggle('u106', !active);
     });
-    playTestimonialProgress();
+  }
+
+  function renderTestimonial(index, { isFirst = false } = {}) {
+    if (!testimonialRoot) return;
+    testimonialIndex = (index + testimonials.length) % testimonials.length;
+    const item = testimonials[testimonialIndex];
+
+    if (isFirst || reduceMotion || testimonialTransitioning) {
+      applyTestimonialContent(item);
+      playTestimonialProgress();
+      return;
+    }
+
+    testimonialTransitioning = true;
+    const face = testimonialRoot.querySelector('[data-testimonial-face]');
+    const fadeEls = [
+      testimonialRoot.querySelector('.u095'),
+      testimonialRoot.querySelector('.u096'),
+      testimonialRoot.querySelector('[data-testimonial-meta]')
+    ];
+    face?.classList.add('is-flipping');
+    fadeEls.forEach((el) => el?.classList.add('is-fading'));
+
+    window.setTimeout(() => {
+      applyTestimonialContent(item);
+      fadeEls.forEach((el) => el?.classList.remove('is-fading'));
+    }, TESTIMONIAL_TRANSITION_MS / 2);
+
+    window.setTimeout(() => {
+      face?.classList.remove('is-flipping');
+      testimonialTransitioning = false;
+      playTestimonialProgress();
+    }, TESTIMONIAL_TRANSITION_MS);
   }
 
   testimonialRoot?.querySelectorAll('[data-testimonial-dot]').forEach((dot, index) => dot.addEventListener('click', () => {
     testimonialAutoplay = false;
+    stopTestimonialProgress();
     renderTestimonial(index);
   }));
   testimonialRoot?.querySelector('[aria-label="Previous testimonial"]')?.addEventListener('click', () => {
     testimonialAutoplay = false;
+    stopTestimonialProgress();
     renderTestimonial(testimonialIndex - 1);
   });
   testimonialRoot?.querySelector('[aria-label="Next testimonial"]')?.addEventListener('click', () => {
     testimonialAutoplay = false;
+    stopTestimonialProgress();
     renderTestimonial(testimonialIndex + 1);
   });
-  testimonialRoot?.addEventListener('mouseenter', () => {
-    testimonialHovered = true;
-    stopTestimonialProgress();
-  });
-  testimonialRoot?.addEventListener('mouseleave', () => {
-    testimonialHovered = false;
-    playTestimonialProgress();
-  });
-  renderTestimonial(0);
+  if (canHover) {
+    testimonialRoot?.addEventListener('mouseenter', () => {
+      testimonialHovered = true;
+      stopTestimonialProgress();
+    });
+    testimonialRoot?.addEventListener('mouseleave', () => {
+      testimonialHovered = false;
+      playTestimonialProgress();
+    });
+  }
+  renderTestimonial(0, { isFirst: true });
 
   function initWebGL(canvas) {
     const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false });
