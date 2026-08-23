@@ -525,10 +525,13 @@ body.modal-open { overflow: hidden; }
 .u127{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0px; max-width: 30ch; font-size: 12.5px; line-height: 1.85; font-weight: 400; color: rgb(91, 83, 71)}
 .u128{display: flex; flex-wrap: wrap; gap: 10px}
 .u129{width: 38px; height: 38px; border: 1px solid rgba(42, 36, 30, 0.24); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9.5px; letter-spacing: 0.08em; transition: background 350ms, color 350ms}
-.u129b{display: flex; align-items: center; justify-content: center; gap: 7px; width: 190px; padding: 7px 16px; background: rgb(42, 36, 30); border: 1px solid rgb(42, 36, 30); border-radius: 999px; font-size: 9.5px; letter-spacing: 0.08em; color: rgb(245, 240, 232); white-space: nowrap; box-shadow: 0 0 0 rgba(176, 141, 87, 0); transition: background 350ms, border-color 350ms, transform 350ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 350ms}
-.u129b svg{flex: 0 0 auto}
-.u129b:hover{background: rgb(176, 141, 87); border-color: rgb(176, 141, 87); transform: translateY(-2px); box-shadow: 0 10px 22px rgba(176, 141, 87, 0.35)}
-.u129b svg{transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1)}
+.u129b{box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 7px; width: 190px; padding: 7px 16px; border-radius: 999px; font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em; white-space: nowrap; box-shadow: 0 0 0 rgba(42, 36, 30, 0); transition: background 350ms, border-color 350ms, transform 350ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 350ms, filter 350ms}
+.u129b svg{flex: 0 0 auto; transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1)}
+.u129b:hover{transform: translateY(-2px)}
+.badge-instagram{background: linear-gradient(135deg, #FFD600, #FF7A00 30%, #FF0169 60%, #D300C5); border: none; color: #fff}
+.badge-instagram:hover{filter: brightness(1.08)}
+.badge-google{background: #fff; border: 1px solid rgba(42, 36, 30, 0.22); color: rgb(42, 36, 30)}
+.badge-google:hover{background: rgb(248, 248, 248); box-shadow: 0 10px 22px rgba(42, 36, 30, 0.16)}
 .u129b:hover svg{transform: scale(1.15) rotate(-4deg)}
 .u130{display: flex; flex-direction: column; gap: 11px}
 .u131{margin: 0px 0px 5px; font-size: 9.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgb(138, 127, 112)}
