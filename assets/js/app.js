@@ -81,10 +81,21 @@
     button.addEventListener('click', () => closeDialog(storyDialog));
   });
 
+  const supportsWebp = (() => {
+    try {
+      return document.createElement('canvas').toDataURL('image/webp').startsWith('data:image/webp');
+    } catch (error) {
+      return false;
+    }
+  })();
+
   function galleryItems(dialog) {
     return [...dialog.querySelectorAll('figure [role="button"]')].map((button) => {
       const image = button.querySelector('img');
-      return { src: image?.getAttribute('src') || '', alt: image?.getAttribute('alt') || button.getAttribute('aria-label') || '' };
+      // The lightbox paints via background-image, which skips <picture> negotiation,
+      // so pick the WebP ourselves when the browser can decode it.
+      const webp = supportsWebp ? button.querySelector('source[type="image/webp"]')?.getAttribute('srcset') : '';
+      return { src: webp || image?.getAttribute('src') || '', alt: image?.getAttribute('alt') || button.getAttribute('aria-label') || '' };
     });
   }
 
