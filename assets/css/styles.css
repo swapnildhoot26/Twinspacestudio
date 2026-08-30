@@ -399,7 +399,7 @@ body.modal-open { overflow: hidden; }
 .u024{position: absolute; inset: 0px; background: linear-gradient(94deg, rgba(28, 24, 20, 0.78) 0%, rgba(28, 24, 20, 0.57) 38%, rgba(28, 24, 20, 0.17) 68%, rgba(28, 24, 20, 0.3) 100%)}
 .u025{position: absolute; inset: 0px; background: linear-gradient(rgba(28, 24, 20, 0) 0%, rgba(28, 24, 20, 0) 30%, rgba(28, 24, 20, 0.29) 100%)}
 .u026{position: relative; width: 100%; max-width: 1360px; margin: 0px auto; color: rgb(245, 240, 232)}
-.u027{font-family: "Cormorant Garamond", serif; font-weight: 300; font-size: clamp(40px, 8vw, 104px); line-height: 1.02; letter-spacing: -0.015em; margin: 0px; max-width: 15ch; text-wrap: balance}
+.u027{font-family: "Cormorant Garamond", serif; font-weight: 300; font-size: clamp(40px, 8vw, 104px); line-height: 1.02; letter-spacing: -0.015em; margin: 0px; text-wrap: balance}
 .u028{font-style: italic; color: rgb(216, 184, 132)}
 .u029{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: clamp(20px, 3.4vw, 32px) 0px clamp(26px, 4vw, 38px); max-width: 44ch; font-size: clamp(14.5px, 3.4vw, 17px); line-height: 1.8; font-weight: 400; color: rgba(245, 240, 232, 0.86); text-wrap: pretty}
 .u030{display: flex; flex-wrap: wrap; gap: 12px}
@@ -692,3 +692,5 @@ picture{display: contents}
 .service-siblings li{padding: 10px 0px; border-bottom: 1px solid rgba(42, 36, 30, 0.1); font-size: 14px}
 .service-siblings a{color: rgb(138, 110, 62); border-bottom: none}
 .service-siblings a:hover{color: rgb(176, 141, 87)}
+.hero-eyebrow{display: block; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: clamp(10px, 1.4vw, 11.5px); font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: rgb(216, 184, 132); margin-bottom: clamp(14px, 2vw, 20px); line-height: 1.5; text-wrap: wrap}
+.hero-line{display: block; max-width: 15ch}
