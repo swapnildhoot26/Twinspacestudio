@@ -89,6 +89,14 @@
     }
   })();
 
+  // CSS background-image skips <picture> negotiation, so swap in the WebP by hand.
+  // Every assets/opt/*.jpg has a matching assets/opt/webp/*.webp.
+  const webpSrc = (path) => (
+    supportsWebp && typeof path === 'string' && path.startsWith('assets/opt/') && path.endsWith('.jpg')
+      ? `assets/opt/webp/${path.slice('assets/opt/'.length, -4)}.webp`
+      : path
+  );
+
   function galleryItems(dialog) {
     return [...dialog.querySelectorAll('figure [role="button"]')].map((button) => {
       const image = button.querySelector('img');
@@ -236,7 +244,7 @@
     heroSlides.forEach((slide, itemIndex) => {
       const source = mobileHero.matches ? slide.dataset.heroMobileSrc : slide.dataset.heroSrc;
       if (itemIndex === index && source && slide.dataset.loadedHero !== source) {
-        slide.style.backgroundImage = `url("${source}")`;
+        slide.style.backgroundImage = `url("${webpSrc(source)}")`;
         slide.dataset.loadedHero = source;
       }
       slide.style.opacity = itemIndex === index ? '1' : '0';
@@ -352,9 +360,9 @@
     testimonialRoot.querySelector('[data-testimonial-quote]').textContent = `“${item.text}”`;
     testimonialRoot.querySelector('[data-testimonial-name]').textContent = item.name;
     testimonialRoot.querySelector('[data-testimonial-location]').textContent = item.location;
-    testimonialRoot.querySelector('[data-testimonial-image]').style.backgroundImage = `url("${item.image}")`;
+    testimonialRoot.querySelector('[data-testimonial-image]').style.backgroundImage = `url("${webpSrc(item.image)}")`;
     testimonialRoot.querySelector('[data-testimonial-image]').setAttribute('aria-label', `Home of ${item.name}`);
-    testimonialRoot.querySelector('[data-testimonial-face]').style.backgroundImage = item.face ? `url("${item.face}")` : 'none';
+    testimonialRoot.querySelector('[data-testimonial-face]').style.backgroundImage = item.face ? `url("${webpSrc(item.face)}")` : 'none';
     testimonialRoot.querySelectorAll('[data-testimonial-dot]').forEach((dot, dotIndex) => {
       const line = dot.firstElementChild || dot;
       const active = dotIndex === testimonialIndex;
