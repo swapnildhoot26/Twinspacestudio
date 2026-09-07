@@ -697,20 +697,19 @@ picture{display: contents}
 
 /* ---- Areas hub: map + per-area sections ---- */
 .areas-page{max-width: 78ch}
-.areas-map-wrap{display: grid; grid-template-columns: minmax(150px, 210px) minmax(0, 1fr); gap: clamp(18px, 3vw, 40px); align-items: center; margin: 34px 0px 46px; padding: clamp(20px, 3vw, 32px); background: rgb(237, 230, 218)}
-.areas-map-list{list-style: none; margin: 0px; padding: 0px; columns: 1; max-width: none}
-.areas-map-list li{padding: 5px 0px; font-size: 13.5px; line-height: 1.5}
-.areas-map-list a{color: rgb(84, 76, 65); border-bottom: none; transition: color 200ms}
-.areas-map-list a:hover{color: rgb(176, 141, 87)}
+.areas-map-wrap{width: min(1180px, 94vw); margin: 38px 0px 50px 50%; transform: translateX(-50%); padding: clamp(18px, 2.6vw, 30px); background: rgb(237, 230, 218)}
 .areas-map-figure{min-width: 0px}
 .areas-map{display: block; width: 100%; height: auto}
-.map-field{fill: rgba(176, 141, 87, 0.13); stroke: rgba(176, 141, 87, 0.3); stroke-width: 1.5}
-.map-dot{fill: rgba(42, 36, 30, 0.38)}
-.map-dot-t1{fill: rgb(176, 141, 87)}
-.map-studio-ring{fill: none; stroke: rgb(42, 36, 30); stroke-width: 1.2; opacity: 0.5}
-.map-studio-dot{fill: rgb(42, 36, 30)}
-.areas-map-note{margin: 14px 0px 0px !important; font-size: 11.5px !important; line-height: 1.6; color: rgb(126, 116, 102) !important; max-width: none !important}
+.map-river{fill: none; stroke: rgba(122, 142, 138, 0.5); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round}
+.map-ring{fill: none; stroke: rgba(42, 36, 30, 0.09); stroke-width: 1.2; stroke-dasharray: 2 7}
+.map-dot{fill: rgb(176, 141, 87)}
 
+.map-name{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 500; fill: rgb(60, 51, 41); letter-spacing: 0.01em}
+
+.map-studio-ring{fill: none; stroke: rgb(42, 36, 30); stroke-width: 1.1; opacity: 0.45}
+.map-studio-dot{fill: rgb(42, 36, 30)}
+.map-studio-label{font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; fill: rgb(42, 36, 30)}
+.areas-map-note{margin: 14px 0px 0px !important; font-size: 11.5px !important; line-height: 1.6; color: rgb(126, 116, 102) !important; max-width: none !important}
 .area-entry{padding: 26px 0px; border-top: 1px solid rgba(42, 36, 30, 0.12)}
 .area-entry:first-of-type{border-top: none}
 .area-entry h3{font-family: "Cormorant Garamond", serif; font-weight: 400; font-size: clamp(20px, 2.6vw, 27px); line-height: 1.2; margin: 0px 0px 12px; color: rgb(42, 36, 30)}
@@ -732,3 +731,9 @@ picture{display: contents}
 .area-page .faq-list, .area-page .faq-item{max-width: none}
 .area-page .faq-item{border-bottom: 1px solid rgba(42, 36, 30, 0.18)}
 .area-page .faq-item:first-of-type{border-top: 1px solid rgba(42, 36, 30, 0.18)}
+@media (max-width: 700px){
+  /* below this the map would render labels at ~5px, so let it scroll at a legible width */
+  .areas-map-figure{overflow-x: auto; -webkit-overflow-scrolling: touch}
+  .areas-map{min-width: 640px}
+  .areas-map-note::after{content: " Scroll the map sideways to see the eastern areas."; color: rgb(146, 136, 122)}
+}
