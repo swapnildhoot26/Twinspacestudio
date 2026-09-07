@@ -694,3 +694,41 @@ picture{display: contents}
 .service-siblings a:hover{color: rgb(176, 141, 87)}
 .hero-eyebrow{display: block; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: clamp(10px, 1.4vw, 11.5px); font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: rgb(216, 184, 132); margin-bottom: clamp(14px, 2vw, 20px); line-height: 1.5; text-wrap: wrap}
 .hero-line{display: block; max-width: 15ch}
+
+/* ---- Areas hub: map + per-area sections ---- */
+.areas-page{max-width: 78ch}
+.areas-map-wrap{display: grid; grid-template-columns: minmax(150px, 210px) minmax(0, 1fr); gap: clamp(18px, 3vw, 40px); align-items: center; margin: 34px 0px 46px; padding: clamp(20px, 3vw, 32px); background: rgb(237, 230, 218)}
+.areas-map-list{list-style: none; margin: 0px; padding: 0px; columns: 1; max-width: none}
+.areas-map-list li{padding: 5px 0px; font-size: 13.5px; line-height: 1.5}
+.areas-map-list a{color: rgb(84, 76, 65); border-bottom: none; transition: color 200ms}
+.areas-map-list a:hover{color: rgb(176, 141, 87)}
+.areas-map-figure{min-width: 0px}
+.areas-map{display: block; width: 100%; height: auto}
+.map-field{fill: rgba(176, 141, 87, 0.13); stroke: rgba(176, 141, 87, 0.3); stroke-width: 1.5}
+.map-dot{fill: rgba(42, 36, 30, 0.38)}
+.map-dot-t1{fill: rgb(176, 141, 87)}
+.map-studio-ring{fill: none; stroke: rgb(42, 36, 30); stroke-width: 1.2; opacity: 0.5}
+.map-studio-dot{fill: rgb(42, 36, 30)}
+.areas-map-note{margin: 14px 0px 0px !important; font-size: 11.5px !important; line-height: 1.6; color: rgb(126, 116, 102) !important; max-width: none !important}
+
+.area-entry{padding: 26px 0px; border-top: 1px solid rgba(42, 36, 30, 0.12)}
+.area-entry:first-of-type{border-top: none}
+.area-entry h3{font-family: "Cormorant Garamond", serif; font-weight: 400; font-size: clamp(20px, 2.6vw, 27px); line-height: 1.2; margin: 0px 0px 12px; color: rgb(42, 36, 30)}
+.area-entry h3 a{border-bottom: none; color: rgb(42, 36, 30); transition: color 250ms}
+.area-entry h3 a:hover{color: rgb(176, 141, 87)}
+.area-entry p{margin: 0px 0px 12px; font-size: 15px; line-height: 1.75; color: rgb(84, 76, 65); text-wrap: pretty}
+.area-entry p:last-child{margin-bottom: 0px}
+@media (max-width: 640px){
+  .areas-map-wrap{grid-template-columns: 1fr; gap: 22px}
+  .areas-map-list{columns: 2; column-gap: 18px}
+}
+.areas-map-list li{border-bottom: none !important; padding: 5px 0px !important}
+.map-ring{fill: none; stroke: rgba(42, 36, 30, 0.14); stroke-width: 1; stroke-dasharray: 3 5}
+.map-ring-label{fill: rgba(126, 116, 102, 0.85); font-size: 10px; letter-spacing: 0.1em; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif}
+.crumbs{font-size: 10.5px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgb(126, 116, 102); margin: 0px 0px 20px}
+.crumbs a{color: rgb(138, 110, 62); border-bottom: none}
+.crumbs a:hover{color: rgb(176, 141, 87)}
+.crumbs span{opacity: 0.55; margin: 0px 4px}
+.area-page .faq-list, .area-page .faq-item{max-width: none}
+.area-page .faq-item{border-bottom: 1px solid rgba(42, 36, 30, 0.18)}
+.area-page .faq-item:first-of-type{border-top: 1px solid rgba(42, 36, 30, 0.18)}
