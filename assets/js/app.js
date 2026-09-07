@@ -508,10 +508,13 @@
       const target = parseFloat(el.dataset.statTarget);
       const decimals = Number(el.dataset.statDecimals || 0);
       const suffix = el.dataset.statSuffix || '';
+      // The real figures are in the HTML so crawlers without JS read them;
+      // only zero them out here, immediately before animating.
       if (reduceMotion) {
         el.textContent = target.toFixed(decimals) + suffix;
         return;
       }
+      el.textContent = (0).toFixed(decimals) + suffix;
       const duration = 1600;
       const start = performance.now();
       const tick = (now) => {
