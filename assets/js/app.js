@@ -506,8 +506,11 @@
   const trustBanner = document.querySelector('.trust-banner');
   if (trustBanner && !reduceMotion) {
     const shapes = [...trustBanner.querySelectorAll('.trust-icon path, .trust-icon circle')];
+    // Measure every path first, then write. Interleaving getTotalLength with
+    // style writes forces a layout per shape.
+    const lengths = shapes.map((shape) => shape.getTotalLength());
     shapes.forEach((shape, index) => {
-      const length = shape.getTotalLength();
+      const length = lengths[index];
       shape.style.strokeDasharray = length;
       shape.style.strokeDashoffset = length;
       shape.style.transition = `stroke-dashoffset 900ms cubic-bezier(.16,1,.3,1) ${120 + index * 90}ms`;
