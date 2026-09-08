@@ -502,6 +502,28 @@
     window.setTimeout(() => initWebGL(canvas), 1_000);
   }
 
+  // Trust banner icons draw themselves in once the band scrolls into view.
+  const trustBanner = document.querySelector('.trust-banner');
+  if (trustBanner && !reduceMotion) {
+    const shapes = [...trustBanner.querySelectorAll('.trust-icon path, .trust-icon circle')];
+    shapes.forEach((shape, index) => {
+      const length = shape.getTotalLength();
+      shape.style.strokeDasharray = length;
+      shape.style.strokeDashoffset = length;
+      shape.style.transition = `stroke-dashoffset 900ms cubic-bezier(.16,1,.3,1) ${120 + index * 90}ms`;
+    });
+    if ('IntersectionObserver' in window) {
+      const drawObserver = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        drawObserver.disconnect();
+        trustBanner.classList.add('is-drawn');
+      }, { threshold: 0.25 });
+      drawObserver.observe(trustBanner);
+    } else {
+      trustBanner.classList.add('is-drawn');
+    }
+  }
+
   const statNumbers = [...document.querySelectorAll('[data-stat-number]')];
   if (statNumbers.length) {
     const animateStat = (el) => {

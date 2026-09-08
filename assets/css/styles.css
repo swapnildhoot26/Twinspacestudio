@@ -760,3 +760,16 @@ picture{display: contents}
 /* Word units ("days") render smaller than the figure so the stat never wraps
    in the narrow 5-column layout. Mirrors how the star suffix is treated. */
 .stat-unit{font-size: 0.44em; color: inherit; vertical-align: baseline; margin-left: 1px; letter-spacing: 0}
+
+/* ---- Trust banner icons ---- */
+.trust-icon{display: block; margin-bottom: 14px; overflow: visible}
+.trust-icon path, .trust-icon circle{stroke-linecap: round; stroke-linejoin: round; transition: fill 420ms ease}
+.trust-list li:hover .trust-icon{transform: translateY(-5px)}
+.trust-icon{transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1)}
+.trust-list li:hover .trust-icon path, .trust-list li:hover .trust-icon circle{fill: rgba(138, 110, 62, 0.14)}
+/* stroke-draw: JS measures each shape and sets the dash values, then flips this class */
+.trust-banner.is-drawn .trust-icon path, .trust-banner.is-drawn .trust-icon circle{stroke-dashoffset: 0 !important}
+@media (prefers-reduced-motion: reduce){
+  .trust-icon path, .trust-icon circle{stroke-dasharray: none !important; stroke-dashoffset: 0 !important}
+  .trust-list li:hover .trust-icon{transform: none}
+}
