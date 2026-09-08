@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Search Console Dashboard — Twin Space Studio</title>
+<style>
+:root{--cream:#F5F0E8;--tint:#EDE6DA;--ink:#2A241E;--muted:#6E6457;--gold:#B08D57;--line:rgba(42,36,30,.14)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);
+  font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+header{padding:28px clamp(16px,4vw,44px);border-bottom:1px solid var(--line)}
+h1{margin:0 0 4px;font-size:20px;font-weight:600;letter-spacing:-.01em}
+header p{margin:0;color:var(--muted);font-size:13.5px}
+main{padding:clamp(16px,3vw,32px) clamp(16px,4vw,44px);max-width:1200px;margin:0 auto}
+.drop{border:1.5px dashed var(--gold);background:var(--tint);border-radius:4px;
+  padding:34px 20px;text-align:center;cursor:pointer;transition:background .2s}
+.drop.over{background:#E5DBC9}
+.drop b{display:block;font-size:16px;margin-bottom:6px}
+.drop span{color:var(--muted);font-size:13.5px}
+.drop input{display:none}
+.hint{margin-top:10px;font-size:12.5px;color:var(--muted)}
+.hint button{background:none;border:0;color:var(--gold);cursor:pointer;font:inherit;text-decoration:underline;padding:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:26px 0}
+.kpi{background:var(--tint);padding:16px 18px;border-radius:3px}
+.kpi b{display:block;font-size:26px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.kpi span{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+section{margin:30px 0}
+h2{font-size:15px;font-weight:600;margin:0 0 4px;letter-spacing:-.01em}
+.sub{margin:0 0 12px;font-size:13px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:hover{background:var(--tint)}
+.q{max-width:420px;overflow-wrap:anywhere}
+.pill{display:inline-block;padding:1px 7px;border-radius:20px;font-size:11px;font-weight:600;
+  background:rgba(176,141,87,.18);color:#7A5E2E}
+svg.chart{width:100%;height:220px;display:block;overflow:visible}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.chart .axis{fill:var(--muted);font-size:10px}
+.chart .clicks{fill:none;stroke:var(--gold);stroke-width:2}
+.chart .imp{fill:none;stroke:rgba(42,36,30,.3);stroke-width:1.5;stroke-dasharray:3 4}
+.legend{display:flex;gap:18px;font-size:12px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:14px;height:2px;vertical-align:middle;margin-right:5px}
+.empty{color:var(--muted);font-size:13.5px;padding:14px 0}
+.err{background:#F6E7E3;border:1px solid #D9B3A9;color:#7A3B2C;padding:10px 12px;border-radius:3px;font-size:13.5px;margin-top:14px}
+.files{margin-top:12px;font-size:12.5px;color:var(--muted)}
+.files code{background:var(--tint);padding:1px 5px;border-radius:2px}
+footer{padding:22px clamp(16px,4vw,44px);color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Search Console dashboard</h1>
+  <p>Everything runs in this browser tab. Nothing is uploaded, stored or sent anywhere.</p>
+</header>
+<main>
+  <label class="drop" id="drop">
+    <b>Drop your Search Console CSV export here</b>
+    <span>Or click to choose files — <code>Queries.csv</code>, <code>Pages.csv</code>, <code>Dates.csv</code></span>
+    <input type="file" id="file" multiple accept=".csv">
+  </label>
+  <p class="hint">In Search Console open <b>Performance</b>, set the date range, then <b>Export &rsaquo; Download CSV</b>.
+    Unzip it and drop the files above. <button id="demo" type="button">Load sample data instead</button></p>
+  <div id="out"></div>
+</main>
+<footer>Reads Search Console's own CSV export. No API key, no account access, no data leaves this page.</footer>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const out = $('#out');
+
+/* ---------- CSV ---------- */
+function parseCSV(text){
+  const rows=[]; let row=[], cell='', q=false;
+  text = text.replace(/^﻿/,'');
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(q){
+      if(c==='"'){ if(text[i+1]==='"'){cell+='"';i++;} else q=false; }
+      else cell+=c;
+    } else if(c==='"') q=true;
+    else if(c===','){ row.push(cell); cell=''; }
+    else if(c==='\n'){ row.push(cell); rows.push(row); row=[]; cell=''; }
+    else if(c!=='\r') cell+=c;
+  }
+  if(cell.length||row.length){ row.push(cell); rows.push(row); }
+  return rows.filter(r=>r.some(v=>v.trim()!==''));
+}
+const num = (v)=>{ const n=parseFloat(String(v).replace(/[%,\s]/g,'')); return isNaN(n)?0:n; };
+
+/* Search Console names the first column differently per export; detect by header. */
+function classify(rows){
+  const h=(rows[0]||[]).map(x=>x.trim().toLowerCase());
+  const first=h[0]||'';
+  if(first.includes('date')) return 'dates';
+  if(first.includes('quer')) return 'queries';
+  if(first.includes('page')) return 'pages';
+  if(first.includes('countr')) return 'countries';
+  if(first.includes('device')) return 'devices';
+  return null;
+}
+function toObjects(rows){
+  return rows.slice(1).map(r=>({
+    key:(r[0]||'').trim(), clicks:num(r[1]), impressions:num(r[2]), ctr:num(r[3]), position:num(r[4])
+  })).filter(o=>o.key);
+}
+
+/* ---------- charts ---------- */
+function lineChart(series){
+  if(series.length<2) return '';
+  const W=1000,H=220,P={t:12,r:14,b:26,l:44};
+  const maxC=Math.max(...series.map(d=>d.clicks),1);
+  const maxI=Math.max(...series.map(d=>d.impressions),1);
+  const x=i=>P.l+(i/(series.length-1))*(W-P.l-P.r);
+  const yC=v=>H-P.b-(v/maxC)*(H-P.t-P.b);
+  const yI=v=>H-P.b-(v/maxI)*(H-P.t-P.b);
+  const path=(f,y)=>series.map((d,i)=>`${i?'L':'M'}${x(i).toFixed(1)} ${y(d[f]).toFixed(1)}`).join(' ');
+  let g='';
+  for(let k=0;k<=3;k++){ const yy=P.t+k*((H-P.t-P.b)/3);
+    g+=`<line class="grid" x1="${P.l}" y1="${yy}" x2="${W-P.r}" y2="${yy}"/>`
+     +`<text class="axis" x="4" y="${yy+3}">${Math.round(maxC-(k*maxC/3))}</text>`; }
+  const step=Math.max(1,Math.floor(series.length/6));
+  let lab='';
+  series.forEach((d,i)=>{ if(i%step===0||i===series.length-1)
+    lab+=`<text class="axis" x="${x(i)}" y="${H-8}" text-anchor="middle">${d.key.slice(5)}</text>`; });
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">${g}
+    <path class="imp" d="${path('impressions',yI)}"/><path class="clicks" d="${path('clicks',yC)}"/>${lab}</svg>
+    <div class="legend"><span><i style="background:#B08D57"></i>Clicks</span>
+    <span><i style="background:rgba(42,36,30,.3)"></i>Impressions (scaled)</span></div>`;
+}
+
+function table(rows, label, cols){
+  if(!rows.length) return `<p class="empty">No rows.</p>`;
+  const head=`<tr><th>${label}</th>${cols.map(c=>`<th class="n">${c}</th>`).join('')}</tr>`;
+  const body=rows.map(r=>`<tr><td class="q">${r.key.replace(/</g,'&lt;')}</td>
+    <td class="n">${r.clicks}</td><td class="n">${r.impressions}</td>
+    <td class="n">${r.ctr.toFixed(1)}%</td><td class="n">${r.position.toFixed(1)}</td></tr>`).join('');
+  return `<table><thead>${head}</thead><tbody>${body}</tbody></table>`;
+}
+
+/* ---------- render ---------- */
+function render(data){
+  const q=data.queries||[], p=data.pages||[], d=data.dates||[];
+  if(!q.length && !p.length && !d.length){
+    out.innerHTML=`<div class="err">No recognisable Search Console files. Expected columns like
+      <b>Top queries, Clicks, Impressions, CTR, Position</b>.</div>`; return;
+  }
+  const base = q.length?q : p;
+  const clicks=base.reduce((a,r)=>a+r.clicks,0);
+  const imps=base.reduce((a,r)=>a+r.impressions,0);
+  const ctr=imps?(clicks/imps*100):0;
+  const pos=base.length?base.reduce((a,r)=>a+r.position*r.impressions,0)/(imps||1):0;
+
+  /* the actionable cut GSC does not give you directly */
+  const striking=q.filter(r=>r.position>=5&&r.position<=20)
+                  .sort((a,b)=>b.impressions-a.impressions).slice(0,15);
+  const noClicks=q.filter(r=>r.clicks===0&&r.impressions>=20)
+                  .sort((a,b)=>b.impressions-a.impressions).slice(0,10);
+
+  out.innerHTML=`
+  <div class="kpis">
+    <div class="kpi"><b>${clicks.toLocaleString()}</b><span>Clicks</span></div>
+    <div class="kpi"><b>${imps.toLocaleString()}</b><span>Impressions</span></div>
+    <div class="kpi"><b>${ctr.toFixed(1)}%</b><span>Average CTR</span></div>
+    <div class="kpi"><b>${pos.toFixed(1)}</b><span>Average position</span></div>
+  </div>
+  ${d.length?`<section><h2>Clicks and impressions over time</h2>
+    <p class="sub">${d.length} days. Impressions are scaled to their own maximum so the shapes stay comparable.</p>
+    ${lineChart(d)}</section>`:''}
+  <section><h2>Striking distance <span class="pill">act on these first</span></h2>
+    <p class="sub">Queries ranking 5&ndash;20 with the most impressions. Closest to page one, so small copy changes move them furthest.</p>
+    ${table(striking,'Query',['Clicks','Impr.','CTR','Pos.'])}</section>
+  <section><h2>Impressions but no clicks</h2>
+    <p class="sub">You appear for these and nobody clicks. Usually a title or meta description problem, not a ranking one.</p>
+    ${table(noClicks,'Query',['Clicks','Impr.','CTR','Pos.'])}</section>
+  ${q.length?`<section><h2>Top queries</h2><p class="sub">By clicks.</p>
+    ${table(q.slice().sort((a,b)=>b.clicks-a.clicks).slice(0,20),'Query',['Clicks','Impr.','CTR','Pos.'])}</section>`:''}
+  ${p.length?`<section><h2>Top pages</h2><p class="sub">By clicks.</p>
+    ${table(p.slice().sort((a,b)=>b.clicks-a.clicks).slice(0,20),'Page',['Clicks','Impr.','CTR','Pos.'])}</section>`:''}`;
+}
+
+/* ---------- input ---------- */
+async function handle(files){
+  const data={};
+  for(const f of files){
+    if(!/\.csv$/i.test(f.name)) continue;
+    const rows=parseCSV(await f.text());
+    const kind=classify(rows);
+    if(kind) data[kind]=toObjects(rows);
+  }
+  render(data);
+}
+$('#file').addEventListener('change', e=>handle(e.target.files));
+const drop=$('#drop');
+['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over');}));
+['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over');}));
+drop.addEventListener('drop', e=>handle(e.dataTransfer.files));
+
+$('#demo').addEventListener('click',()=>{
+  const qs=[['interior designers in pune',14,980,1.4,8.2],['2 bhk interior design cost in pune',9,410,2.2,6.1],
+    ['interior designers in baner',7,150,4.7,4.3],['modular kitchen pune',3,620,0.5,14.8],
+    ['turnkey interiors pune',2,180,1.1,11.2],['interior designers in kharadi',2,95,2.1,7.4],
+    ['3 bhk interior design pune',1,340,0.3,17.5],['best interior designers in pune',0,260,0,19.1],
+    ['interior design charges in pune',0,140,0,22.4],['false ceiling design pune',0,88,0,26.0]];
+  const ps=[['https://twinspacestudios.com/',18,1450,1.2,9.6],
+    ['https://twinspacestudios.com/services/2-bhk-interior-design',9,430,2.1,7.2],
+    ['https://twinspacestudios.com/areas/baner',6,190,3.2,5.8],
+    ['https://twinspacestudios.com/services/modular-kitchens',3,640,0.5,15.1]];
+  const ds=[]; let base=30;
+  for(let i=0;i<28;i++){ const day=new Date(Date.now()-(27-i)*864e5).toISOString().slice(0,10);
+    base+=Math.round((Math.random()-.35)*8); base=Math.max(8,base);
+    ds.push([day, Math.max(0,Math.round(base/22)), base*7, 1.3, 10]); }
+  const map=a=>a.map(r=>({key:r[0],clicks:r[1],impressions:r[2],ctr:r[3],position:r[4]}));
+  render({queries:map(qs),pages:map(ps),dates:map(ds)});
+});
+</script>
+</body>
+</html>
