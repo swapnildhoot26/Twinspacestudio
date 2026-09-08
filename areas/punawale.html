@@ -84,7 +84,7 @@ handover — changes are yours to approve in writing before anyone lifts a tool.
 other <a href="/areas-we-serve">areas we serve</a>. Call Pooja Dhoot on
 <a href="tel:+918208093011">+91 82080 93011</a> or Dimple Marathe on
 <a href="tel:+918888177217">+91 88881 77217</a>.</p>
-<h2>Common questions</h2><details class="faq-item"><summary class="faq-q">How much does a 2 BHK interior cost in Punawale?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">A full 2 BHK interior runs ₹12–16 lakh depending on scope, materials and finishes. You receive a line-item quote before any work begins, and the figure quoted on day one is the figure at handover.</p></details><details class="faq-item"><summary class="faq-q">This is our first home. How does the process work?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Six stages over ten to twelve weeks: Discover, Conceptualize, Design and plan, Select and finalize, Execute, then Deliver and stylize. We explain what happens in what order and when you need to decide, rather than assuming you already know.</p></details><details class="faq-item"><summary class="faq-q">Can we reduce the scope if the quote is above our budget?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Yes, and the line-item quote is what makes that possible. You can see exactly what each element costs and what deferring one saves before committing.</p></details>
+<h2>Common questions</h2><details class="faq-item" name="faq"><summary class="faq-q">How much does a 2 BHK interior cost in Punawale?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">A full 2 BHK interior runs ₹12–16 lakh depending on scope, materials and finishes. You receive a line-item quote before any work begins, and the figure quoted on day one is the figure at handover.</p></details><details class="faq-item" name="faq"><summary class="faq-q">This is our first home. How does the process work?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Six stages over ten to twelve weeks: Discover, Conceptualize, Design and plan, Select and finalize, Execute, then Deliver and stylize. We explain what happens in what order and when you need to decide, rather than assuming you already know.</p></details><details class="faq-item" name="faq"><summary class="faq-q">Can we reduce the scope if the quote is above our budget?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Yes, and the line-item quote is what makes that possible. You can see exactly what each element costs and what deferring one saves before committing.</p></details>
 </article>
 </main>
 
@@ -98,5 +98,18 @@ other <a href="/areas-we-serve">areas we serve</a>. Call Pooja Dhoot on
   <p>A-1102, Phase 4, Puraniks Aldea Anexo, Mahalunge, Baner, Pune 411045</p>
   <p>&copy; 2026 Twin Space Studio, Pune. All rights reserved.</p>
 </footer>
+<script>
+// Browsers without <details name> support get the same one-at-a-time behaviour.
+(function () {
+  if ('name' in document.createElement('details')) return;
+  var items = document.querySelectorAll('details.faq-item');
+  items.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      items.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+})();
+</script>
 </body>
 </html>

@@ -90,7 +90,7 @@ goes in. The line-item quote makes that visible rather than buried.</p>
 <a href="/areas-we-serve">areas we serve</a>. Call Pooja Dhoot on
 <a href="tel:+918208093011">+91 82080 93011</a> or Dimple Marathe on
 <a href="tel:+918888177217">+91 88881 77217</a>.</p>
-<h2>Common questions</h2><details class="faq-item"><summary class="faq-q">Do you take on renovations in older Kothrud societies?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Yes, and a good share of our Kothrud work is exactly that. We survey plumbing runs, structural walls and electrical load before finalising drawings, because discovering those later turns a small problem into an expensive one.</p></details><details class="faq-item"><summary class="faq-q">Can you work while we are living in the flat?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Yes. We zone the work so you keep a functioning kitchen or bathroom and contain dust rather than tolerate it. It runs slower than an empty flat, and we say so upfront.</p></details><details class="faq-item"><summary class="faq-q">How much does a 3 BHK interior cost in Kothrud?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">A full 3 BHK interior runs ₹16–21 lakh and a 2 BHK ₹12–16 lakh. Renovation scopes are quoted separately, since removing old wiring, plumbing and joinery varies flat to flat.</p></details>
+<h2>Common questions</h2><details class="faq-item" name="faq"><summary class="faq-q">Do you take on renovations in older Kothrud societies?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Yes, and a good share of our Kothrud work is exactly that. We survey plumbing runs, structural walls and electrical load before finalising drawings, because discovering those later turns a small problem into an expensive one.</p></details><details class="faq-item" name="faq"><summary class="faq-q">Can you work while we are living in the flat?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Yes. We zone the work so you keep a functioning kitchen or bathroom and contain dust rather than tolerate it. It runs slower than an empty flat, and we say so upfront.</p></details><details class="faq-item" name="faq"><summary class="faq-q">How much does a 3 BHK interior cost in Kothrud?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">A full 3 BHK interior runs ₹16–21 lakh and a 2 BHK ₹12–16 lakh. Renovation scopes are quoted separately, since removing old wiring, plumbing and joinery varies flat to flat.</p></details>
 </article>
 </main>
 
@@ -104,5 +104,18 @@ goes in. The line-item quote makes that visible rather than buried.</p>
   <p>A-1102, Phase 4, Puraniks Aldea Anexo, Mahalunge, Baner, Pune 411045</p>
   <p>&copy; 2026 Twin Space Studio, Pune. All rights reserved.</p>
 </footer>
+<script>
+// Browsers without <details name> support get the same one-at-a-time behaviour.
+(function () {
+  if ('name' in document.createElement('details')) return;
+  var items = document.querySelectorAll('details.faq-item');
+  items.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      items.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+})();
+</script>
 </body>
 </html>

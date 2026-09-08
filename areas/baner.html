@@ -115,7 +115,7 @@ duplexes, and our service pages go deeper on
 <p>To talk through a home in Baner, call Pooja Dhoot on
 <a href="tel:+918208093011">+91 82080 93011</a> or Dimple Marathe on
 <a href="tel:+918888177217">+91 88881 77217</a>.</p>
-<h2>Common questions</h2><details class="faq-item"><summary class="faq-q">How much does interior design cost in Baner, Pune?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">A full 2 BHK interior runs ₹12–16 lakh and a full 3 BHK ₹16–21 lakh. Duplex and 4 BHK projects are quoted on scope. You receive a transparent line-item quote before any work begins.</p></details><details class="faq-item"><summary class="faq-q">How long does a full home interior take in Baner?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Ten to twelve weeks from first concept to final styling, against a dated plan. Duplexes can run slightly longer depending on the joinery count.</p></details><details class="faq-item"><summary class="faq-q">Do you handle society permissions and working-hour restrictions?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Yes. Baner societies typically enforce defined working hours, service lift booking and rules on material movement. We plan the schedule around those from the start rather than negotiating mid-project.</p></details><details class="faq-item"><summary class="faq-q">Do you work on duplexes and 4 BHK homes in Baner?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Yes. Baner is where we most often design across two levels. Our delivered duplex on Baner Road carried one material language floor to floor so the home reads as a single residence.</p></details>
+<h2>Common questions</h2><details class="faq-item" name="faq"><summary class="faq-q">How much does interior design cost in Baner, Pune?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">A full 2 BHK interior runs ₹12–16 lakh and a full 3 BHK ₹16–21 lakh. Duplex and 4 BHK projects are quoted on scope. You receive a transparent line-item quote before any work begins.</p></details><details class="faq-item" name="faq"><summary class="faq-q">How long does a full home interior take in Baner?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Ten to twelve weeks from first concept to final styling, against a dated plan. Duplexes can run slightly longer depending on the joinery count.</p></details><details class="faq-item" name="faq"><summary class="faq-q">Do you handle society permissions and working-hour restrictions?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Yes. Baner societies typically enforce defined working hours, service lift booking and rules on material movement. We plan the schedule around those from the start rather than negotiating mid-project.</p></details><details class="faq-item" name="faq"><summary class="faq-q">Do you work on duplexes and 4 BHK homes in Baner?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Yes. Baner is where we most often design across two levels. Our delivered duplex on Baner Road carried one material language floor to floor so the home reads as a single residence.</p></details>
 </article>
 </main>
 
@@ -129,5 +129,18 @@ duplexes, and our service pages go deeper on
   <p>A-1102, Phase 4, Puraniks Aldea Anexo, Mahalunge, Baner, Pune 411045</p>
   <p>&copy; 2026 Twin Space Studio, Pune. All rights reserved.</p>
 </footer>
+<script>
+// Browsers without <details name> support get the same one-at-a-time behaviour.
+(function () {
+  if ('name' in document.createElement('details')) return;
+  var items = document.querySelectorAll('details.faq-item');
+  items.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      items.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+})();
+</script>
 </body>
 </html>

@@ -87,7 +87,7 @@ fortnight.</p>
 <a href="/areas-we-serve">areas we serve</a> across Pune and PCMC. Call Pooja
 Dhoot on <a href="tel:+918208093011">+91 82080 93011</a> or Dimple Marathe on
 <a href="tel:+918888177217">+91 88881 77217</a>.</p>
-<h2>Common questions</h2><details class="faq-item"><summary class="faq-q">How much does interior design cost in Kharadi, Pune?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">A full 2 BHK interior runs ₹12–16 lakh and a full 3 BHK ₹16–21 lakh, depending on scope, materials and finishes. You receive a transparent line-item quote before any work begins.</p></details><details class="faq-item"><summary class="faq-q">Do you work in new possession towers near EON IT Park?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Yes, that is most of our Kharadi work. Phase handovers mean service lifts and material movement are tightly scheduled, so we book slots in advance and sequence deliveries against them.</p></details><details class="faq-item"><summary class="faq-q">How long does a 3 BHK interior take in Kharadi?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Ten to twelve weeks from first concept to final styling, against a dated plan you can hold us to.</p></details>
+<h2>Common questions</h2><details class="faq-item" name="faq"><summary class="faq-q">How much does interior design cost in Kharadi, Pune?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">A full 2 BHK interior runs ₹12–16 lakh and a full 3 BHK ₹16–21 lakh, depending on scope, materials and finishes. You receive a transparent line-item quote before any work begins.</p></details><details class="faq-item" name="faq"><summary class="faq-q">Do you work in new possession towers near EON IT Park?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Yes, that is most of our Kharadi work. Phase handovers mean service lifts and material movement are tightly scheduled, so we book slots in advance and sequence deliveries against them.</p></details><details class="faq-item" name="faq"><summary class="faq-q">How long does a 3 BHK interior take in Kharadi?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Ten to twelve weeks from first concept to final styling, against a dated plan you can hold us to.</p></details>
 </article>
 </main>
 
@@ -101,5 +101,18 @@ Dhoot on <a href="tel:+918208093011">+91 82080 93011</a> or Dimple Marathe on
   <p>A-1102, Phase 4, Puraniks Aldea Anexo, Mahalunge, Baner, Pune 411045</p>
   <p>&copy; 2026 Twin Space Studio, Pune. All rights reserved.</p>
 </footer>
+<script>
+// Browsers without <details name> support get the same one-at-a-time behaviour.
+(function () {
+  if ('name' in document.createElement('details')) return;
+  var items = document.querySelectorAll('details.faq-item');
+  items.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      items.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+})();
+</script>
 </body>
 </html>

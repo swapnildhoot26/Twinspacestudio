@@ -383,11 +383,11 @@
 <h2 class="u051">Good to know <em class="u052">before we begin.</em></h2>
 </div>
 <div class="faq-list">
-<details class="faq-item">
+<details class="faq-item" name="faq">
 <summary class="faq-q">What areas do you serve?<span aria-hidden="true" class="faq-icon"></span></summary>
 <p class="faq-a">We work across Pune and Pimpri-Chinchwad (PCMC). That includes Baner, Balewadi, Kharadi, Wakad, Hinjawadi, Kothrud, Koregaon Park, Viman Nagar, Kalyani Nagar, Aundh, Mahalunge, Bavdhan, Sus, Pashan, Punawale, Tathawade, Erandwane, Mundhwa, Hadapsar, Magarpatta City, Kondhwa and Pimple Saudagar. If your area is not listed, ask — see the full list of <a href="/areas-we-serve">areas we serve</a>.</p>
 </details>
-<details class="faq-item">
+<details class="faq-item" name="faq">
 <summary class="faq-q">What does your design process look like, start to finish?<span aria-hidden="true" class="faq-icon"></span></summary>
 <ol class="faq-steps">
 <li><b class="faq-step-n">Step 1 — Discover</b><span class="faq-step-d">How you actually live — routines, guests, storage, light.</span></li>
@@ -399,23 +399,23 @@
 </ol>
 <p class="faq-a faq-steps-note">Most full homes run 10–12 weeks end to end.</p>
 </details>
-<details class="faq-item">
+<details class="faq-item" name="faq">
 <summary class="faq-q">How long does a typical project take?<span aria-hidden="true" class="faq-icon"></span></summary>
 <p class="faq-a">Most projects run 10–12 weeks from initial concept to final styling.</p>
 </details>
-<details class="faq-item">
+<details class="faq-item" name="faq">
 <summary class="faq-q">What does a full home interior cost for a 2 BHK or 3 BHK?<span aria-hidden="true" class="faq-icon"></span></summary>
 <p class="faq-a">As a guide, a full 2 BHK interior runs ₹12–16 lakh and a full 3 BHK ₹16–21 lakh. Where a project lands within that range depends on scope, materials and finishes — you will always have a transparent line-item quote before any work begins.</p>
 </details>
-<details class="faq-item">
+<details class="faq-item" name="faq">
 <summary class="faq-q">Do you handle both residential and commercial projects?<span aria-hidden="true" class="faq-icon"></span></summary>
 <p class="faq-a">Yes — apartments, villas and bungalows, as well as offices and commercial spaces.</p>
 </details>
-<details class="faq-item">
+<details class="faq-item" name="faq">
 <summary class="faq-q">What’s included in turnkey execution?<span aria-hidden="true" class="faq-icon"></span></summary>
 <p class="faq-a">Turnkey means we carry the whole job — design, materials and procurement, all on-site work and trades, project management and supervision, then styling and handover. You get a single point of accountability and a dated plan you can hold us to, instead of coordinating vendors yourself.</p>
 </details>
-<details class="faq-item">
+<details class="faq-item" name="faq">
 <summary class="faq-q">How do I book a consultation?<span aria-hidden="true" class="faq-icon"></span></summary>
 <p class="faq-a">Message us on WhatsApp, or call Pooja Dhoot on <a href="tel:+918208093011">+91 82080 93011</a> or Dimple Marathe on <a href="tel:+918888177217">+91 88881 77217</a> to schedule a consultation.</p>
 </details>
@@ -1398,5 +1398,18 @@ INSTAGRAM
 </div>
 </div>
 </div>
+<script>
+// Browsers without <details name> support get the same one-at-a-time behaviour.
+(function () {
+  if ('name' in document.createElement('details')) return;
+  var items = document.querySelectorAll('details.faq-item');
+  items.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      items.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+})();
+</script>
 </body>
 </html>

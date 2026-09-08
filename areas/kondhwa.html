@@ -88,7 +88,7 @@ is itemised before anything is ordered.</p>
 <a href="/areas-we-serve">areas we serve</a> across Pune and PCMC. Call Pooja
 Dhoot on <a href="tel:+918208093011">+91 82080 93011</a> or Dimple Marathe on
 <a href="tel:+918888177217">+91 88881 77217</a>.</p>
-<h2>Common questions</h2><details class="faq-item"><summary class="faq-q">How much does a 4 BHK interior cost in Kondhwa?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Four-bedroom projects are quoted on scope, because the joinery count rather than the floor area drives the figure. For reference, a full 3 BHK interior runs ₹16–21 lakh and a 2 BHK ₹12–16 lakh.</p></details><details class="faq-item"><summary class="faq-q">How do you stop a large home feeling disjointed?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">One material language repeated with variation across rooms, rather than four separate schemes. In our Kondhwa 4 BHK a slatted timber ceiling defines the dining zone without a wall, and the same warmth carries through the shared spaces.</p></details><details class="faq-item"><summary class="faq-q">How long does a 4 BHK interior take?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Most full homes run ten to twelve weeks from concept to final styling. Larger homes can run slightly longer depending on the joinery count, and we quote the schedule with the scope.</p></details>
+<h2>Common questions</h2><details class="faq-item" name="faq"><summary class="faq-q">How much does a 4 BHK interior cost in Kondhwa?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Four-bedroom projects are quoted on scope, because the joinery count rather than the floor area drives the figure. For reference, a full 3 BHK interior runs ₹16–21 lakh and a 2 BHK ₹12–16 lakh.</p></details><details class="faq-item" name="faq"><summary class="faq-q">How do you stop a large home feeling disjointed?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">One material language repeated with variation across rooms, rather than four separate schemes. In our Kondhwa 4 BHK a slatted timber ceiling defines the dining zone without a wall, and the same warmth carries through the shared spaces.</p></details><details class="faq-item" name="faq"><summary class="faq-q">How long does a 4 BHK interior take?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Most full homes run ten to twelve weeks from concept to final styling. Larger homes can run slightly longer depending on the joinery count, and we quote the schedule with the scope.</p></details>
 </article>
 </main>
 
@@ -102,6 +102,19 @@ Dhoot on <a href="tel:+918208093011">+91 82080 93011</a> or Dimple Marathe on
   <p>A-1102, Phase 4, Puraniks Aldea Anexo, Mahalunge, Baner, Pune 411045</p>
   <p>&copy; 2026 Twin Space Studio, Pune. All rights reserved.</p>
 </footer>
+<script>
+// Browsers without <details name> support get the same one-at-a-time behaviour.
+(function () {
+  if ('name' in document.createElement('details')) return;
+  var items = document.querySelectorAll('details.faq-item');
+  items.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      items.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+})();
+</script>
 </body>
 </html>
 

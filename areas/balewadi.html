@@ -89,7 +89,7 @@ ordered.</p>
 other <a href="/areas-we-serve">areas we serve</a>. Call Pooja Dhoot on
 <a href="tel:+918208093011">+91 82080 93011</a> or Dimple Marathe on
 <a href="tel:+918888177217">+91 88881 77217</a>.</p>
-<h2>Common questions</h2><details class="faq-item"><summary class="faq-q">How much does a 2 BHK interior cost in Balewadi?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">A full 2 BHK interior runs ₹12–16 lakh and a full 3 BHK ₹16–21 lakh, depending on scope, materials and finishes. You receive a line-item quote before any work begins.</p></details><details class="faq-item"><summary class="faq-q">Should I open my kitchen into the living room?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">It suits households that entertain and buys apparent space, but if you cook heavily the smell and noise stay in the living room permanently. We advise per household rather than by default.</p></details><details class="faq-item"><summary class="faq-q">Do you handle society permissions in Balewadi townships?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Yes. Larger Balewadi societies require a written scope, a refundable deposit, service lift booking and defined working hours. We plan the schedule around those from the start.</p></details>
+<h2>Common questions</h2><details class="faq-item" name="faq"><summary class="faq-q">How much does a 2 BHK interior cost in Balewadi?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">A full 2 BHK interior runs ₹12–16 lakh and a full 3 BHK ₹16–21 lakh, depending on scope, materials and finishes. You receive a line-item quote before any work begins.</p></details><details class="faq-item" name="faq"><summary class="faq-q">Should I open my kitchen into the living room?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">It suits households that entertain and buys apparent space, but if you cook heavily the smell and noise stay in the living room permanently. We advise per household rather than by default.</p></details><details class="faq-item" name="faq"><summary class="faq-q">Do you handle society permissions in Balewadi townships?<span aria-hidden="true" class="faq-icon"></span></summary><p class="faq-a">Yes. Larger Balewadi societies require a written scope, a refundable deposit, service lift booking and defined working hours. We plan the schedule around those from the start.</p></details>
 </article>
 </main>
 
@@ -103,5 +103,18 @@ other <a href="/areas-we-serve">areas we serve</a>. Call Pooja Dhoot on
   <p>A-1102, Phase 4, Puraniks Aldea Anexo, Mahalunge, Baner, Pune 411045</p>
   <p>&copy; 2026 Twin Space Studio, Pune. All rights reserved.</p>
 </footer>
+<script>
+// Browsers without <details name> support get the same one-at-a-time behaviour.
+(function () {
+  if ('name' in document.createElement('details')) return;
+  var items = document.querySelectorAll('details.faq-item');
+  items.forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (!d.open) return;
+      items.forEach(function (o) { if (o !== d) o.open = false; });
+    });
+  });
+})();
+</script>
 </body>
 </html>
