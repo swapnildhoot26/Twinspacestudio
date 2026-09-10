@@ -14,7 +14,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://twinspacestudios.com"
 EXCLUDE = {"404.html"}
 PRIORITY = [("index.html", "1.0"), ("areas-we-serve.html", "0.9"),
-            ("services/", "0.9"), ("areas/", "0.8"), ("projects/", "0.7")]
+            ("services/", "0.9"), ("areas/", "0.8"), ("guides.html", "0.8"),
+            ("guides/", "0.7"), ("projects/", "0.7")]
+SKIP_DIRS = {".git", "assets", "node_modules", "scripts", "tools"}
 
 def url_for(rel):
     if rel == "index.html":
@@ -54,14 +56,17 @@ def lastmod_for(rel):
     return datetime.fromtimestamp(ts, timezone.utc).strftime("%Y-%m-%d")
 
 def pages():
+    """Every .html file in the tree, so a new section needs no change here."""
     found = []
-    for rel in ["index.html", "areas-we-serve.html"]:
-        if os.path.exists(os.path.join(ROOT, rel)):
-            found.append(rel)
-    for d in ("services", "areas", "projects"):
-        for p in sorted(glob.glob(os.path.join(ROOT, d, "*.html"))):
-            found.append(os.path.relpath(p, ROOT))
-    return [f for f in found if os.path.basename(f) not in EXCLUDE]
+    for dirpath, dirnames, filenames in os.walk(ROOT):
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS and not d.startswith(".")]
+        for fn in filenames:
+            if fn.endswith(".html"):
+                found.append(os.path.relpath(os.path.join(dirpath, fn), ROOT))
+    found = [f for f in found if os.path.basename(f) not in EXCLUDE]
+    # index first, then by priority, then alphabetically
+    return sorted(found, key=lambda f: (f != "index.html", priority_for(f) != "1.0",
+                                        -float(priority_for(f)), f))
 
 def main():
     rows = []

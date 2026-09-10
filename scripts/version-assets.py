@@ -16,9 +16,12 @@ def digest(rel):
 
 def main():
     hashes = {rel: digest(rel) for rel in TARGETS if os.path.exists(os.path.join(ROOT, rel))}
-    pages = ["index.html", "areas-we-serve.html", "404.html"]
-    for d in ("services", "areas", "projects"):
-        pages += [os.path.relpath(p, ROOT) for p in sorted(glob.glob(os.path.join(ROOT, d, "*.html")))]
+    skip = {".git", "assets", "node_modules", "scripts", "tools"}
+    pages = []
+    for dirpath, dirnames, filenames in os.walk(ROOT):
+        dirnames[:] = [d for d in dirnames if d not in skip and not d.startswith(".")]
+        pages += [os.path.relpath(os.path.join(dirpath, fn), ROOT)
+                  for fn in sorted(filenames) if fn.endswith(".html")]
     changed = 0
     for page in pages:
         path = os.path.join(ROOT, page)

@@ -769,3 +769,17 @@ picture{display: contents}
   .trust-icon path, .trust-icon circle{stroke-dasharray: none !important; stroke-dashoffset: 0 !important}
   .trust-list li:hover .trust-icon{transform: none}
 }
+
+/* ---- Generated area + guide pages ---- */
+.area-page ul{display: block; grid-template-columns: none; margin: 0px 0px 24px}
+.area-page li{padding: 12px 0px; border-bottom: 1px solid rgba(42, 36, 30, 0.1)}
+.area-page li:last-child{border-bottom: none}
+.area-page li strong{font-weight: 600; color: rgb(60, 51, 41)}
+.gallery-note{margin: -22px 0px 30px !important; font-size: 11.5px !important; line-height: 1.65; color: rgb(126, 116, 102) !important; letter-spacing: 0.01em}
+.guide-note{margin: 0px 0px 30px !important; padding: 16px 20px; background: rgb(237, 230, 218); border-left: 2px solid rgb(176, 141, 87); font-size: 13.5px !important; line-height: 1.7; color: rgb(84, 76, 65) !important}
+.guide-index{display: block !important; margin: 0px 0px 8px}
+.guide-index li{padding: 15px 0px; border-bottom: 1px solid rgba(42, 36, 30, 0.1)}
+.guide-index a{border-bottom: none}
+.guide-index strong{display: block; font-family: "Cormorant Garamond", serif; font-weight: 400; font-size: clamp(19px, 2.4vw, 24px); line-height: 1.25; color: rgb(42, 36, 30); transition: color 250ms}
+.guide-index a:hover strong{color: rgb(176, 141, 87)}
+.guide-index span{display: block; margin-top: 4px; font-size: 14px; line-height: 1.7; color: rgb(84, 76, 65)}
