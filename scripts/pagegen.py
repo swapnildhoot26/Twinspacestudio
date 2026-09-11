@@ -217,21 +217,70 @@ PROJECT_URLS = {
 }
 
 
-def projects_grid():
-    """The homepage's six-project grid, with its modal buttons turned into real
-    links -- the dialog they open only exists on the homepage."""
+
+# Which delivered projects to show on each area page, nearest first. Showing a
+# relevant subset rather than the same six everywhere is both more useful to a
+# reader and stops 21 pages sharing an identical block.
+AREA_PROJECTS = {
+    "baner": ["Aniket Marathe", "Ashish Kadhane", "Chinmay Patil"],
+    "kothrud": ["Chinmay Patil", "Aniket Marathe", "Ashish Kadhane"],
+    "balewadi": ["Ashish Kadhane", "Aniket Marathe", "Bhavik Shah"],
+    "kharadi": ["Akshay &amp; Radhika Soni", "Sachin Sharma", "Aniket Marathe"],
+    "kondhwa": ["Sachin Sharma", "Akshay &amp; Radhika Soni", "Chinmay Patil"],
+    "punawale": ["Bhavik Shah", "Ashish Kadhane", "Aniket Marathe"],
+    "wakad": ["Ashish Kadhane", "Bhavik Shah", "Aniket Marathe"],
+    "hinjawadi": ["Bhavik Shah", "Ashish Kadhane", "Aniket Marathe"],
+    "aundh": ["Aniket Marathe", "Ashish Kadhane", "Chinmay Patil"],
+    "mahalunge": ["Aniket Marathe", "Ashish Kadhane", "Chinmay Patil"],
+    "sus": ["Aniket Marathe", "Ashish Kadhane", "Chinmay Patil"],
+    "bavdhan": ["Chinmay Patil", "Aniket Marathe", "Ashish Kadhane"],
+    "pashan": ["Aniket Marathe", "Chinmay Patil", "Ashish Kadhane"],
+    "erandwane": ["Chinmay Patil", "Aniket Marathe", "Sachin Sharma"],
+    "tathawade": ["Bhavik Shah", "Ashish Kadhane", "Aniket Marathe"],
+    "koregaon-park": ["Akshay &amp; Radhika Soni", "Sachin Sharma", "Aniket Marathe"],
+    "viman-nagar": ["Akshay &amp; Radhika Soni", "Sachin Sharma", "Aniket Marathe"],
+    "kalyani-nagar": ["Akshay &amp; Radhika Soni", "Sachin Sharma", "Chinmay Patil"],
+    "mundhwa": ["Akshay &amp; Radhika Soni", "Sachin Sharma", "Aniket Marathe"],
+    "hadapsar": ["Sachin Sharma", "Akshay &amp; Radhika Soni", "Aniket Marathe"],
+    "magarpatta-city": ["Sachin Sharma", "Akshay &amp; Radhika Soni", "Chinmay Patil"],
+}
+
+
+def projects_grid(slug=None):
+    """The homepage's project grid, with its modal buttons turned into real links
+    (the dialog they open only exists on the homepage). Given an area slug, shows
+    just that area's three most relevant projects instead of all six."""
     frag = _home_slice('<section class="u048" data-reveal="1" id="projects">', "Bhavik Shah")
 
-    def to_link(m):
-        card = m.group(0)
-        name = re.search(r"<h3[^>]*><span[^>]*>(.*?)</span></h3>", card)
-        url = PROJECT_URLS.get(name.group(1)) if name else None
-        if not url:
-            raise SystemExit("projects_grid: no URL mapped for %r" % (name and name.group(1)))
-        card = re.sub(r"^<button[^>]*>", f'<a class="u082" href="{url}">', card)
-        return card[: -len("</button>")] + "</a>"
+    def name_of(card):
+        m = re.search(r"<h3[^>]*><span[^>]*>(.*?)</span></h3>", card)
+        return m.group(1) if m else None
 
-    return re.sub(r"<button[\s\S]*?</button>", to_link, frag)
+    cards = re.findall(r"<button[\s\S]*?</button>", frag)
+    wanted = AREA_PROJECTS.get(slug)
+    if wanted:
+        by_name = {name_of(c): c for c in cards}
+        missing = [w for w in wanted if w not in by_name]
+        if missing:
+            raise SystemExit("projects_grid: unknown project(s) %r" % missing)
+        chosen = [by_name[w] for w in wanted]
+    else:
+        chosen = cards
+
+    linked = []
+    for card in chosen:
+        url = PROJECT_URLS.get(name_of(card))
+        if not url:
+            raise SystemExit("projects_grid: no URL mapped for %r" % name_of(card))
+        c = re.sub(r"^<button[^>]*>", f'<a class="u082" href="{url}">', card)
+        linked.append(c[: -len("</button>")] + "</a>")
+
+    # swap the whole card set for the chosen one, and retitle honestly
+    first, last = frag.index(cards[0]), frag.rindex(cards[-1]) + len(cards[-1])
+    frag = frag[:first] + "".join(linked) + frag[last:]
+    if wanted:
+        frag = frag.replace("Six of our recent homes", "Recent homes near here")
+    return frag
 
 
 def homepage_bands():
@@ -351,13 +400,15 @@ def render_area_enhanced(page):
     body = re.sub(r'<div class="project-gallery">.*?</div>\s*(?:<p class="gallery-note">.*?</p>)?',
                   "", page["body"], flags=re.S)
     area_name = page.get("area_name") or page.get("service", "Pune").split(",")[0]
+    # Unique local prose leads, so the page says something about this area before
+    # it says anything shared. The process band is dropped here: it is identical on
+    # 21 pages, already on the homepage, and the guide covers it in more depth.
     blocks = [
         hero_html,
-        bands["trust"],
-        projects_grid(),
-        bands["stats"],
-        bands["process"],
         f'<section class="area-copy"><article class="project-page area-page">{body}</article></section>',
+        projects_grid(page.get("slug")),
+        bands["trust"],
+        bands["stats"],
     ]
     if page.get("faqs"):
         blocks.append(
