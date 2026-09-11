@@ -155,7 +155,13 @@ def esc(s):
 
 
 def gallery(ids, note=None):
-    """Render a figure row from photo ids. Captions name the real project."""
+    """Render a figure row from photo ids.
+
+    The whole image is the link to the project it came from, so the caption can
+    stay short and generic. Attribution is still honest -- the alt text and the
+    link destination both name the real project -- it is just one click away
+    rather than spelled out under every photo.
+    """
     figs = []
     for pid in ids:
         w, h, alt, cap = PHOTOS[pid]
@@ -163,10 +169,13 @@ def gallery(ids, note=None):
         jpg, webp = img_paths(pid)
         figs.append(
             '<figure class="project-shot">'
+            f'<a class="shot-link" href="{url}" aria-label="{esc(cap)} — see this project">'
             f'<picture><source srcset="{webp}" type="image/webp"/>'
             f'<img src="{jpg}" alt="{esc(alt)} — {esc(proj)}, by Twin Space Studio" '
             f'width="{w}" height="{h}" loading="lazy"/></picture>'
-            f'<figcaption>{esc(cap)} &mdash; <a href="{url}">{esc(proj)}</a></figcaption>'
+            '<span class="shot-hint" aria-hidden="true">View project &#8599;</span>'
+            '</a>'
+            f'<figcaption>{esc(cap)}</figcaption>'
             '</figure>'
         )
     out = '<div class="project-gallery">' + "".join(figs) + "</div>"
@@ -175,8 +184,8 @@ def gallery(ids, note=None):
     return out
 
 
-def faq_html(faqs):
-    parts = ['<h2>Common questions</h2>']
+def faq_html(faqs, heading=True):
+    parts = ['<h2>Common questions</h2>'] if heading else []
     for q, a in faqs:
         parts.append(
             '<details class="faq-item" name="faq">'
@@ -188,6 +197,57 @@ def faq_html(faqs):
 
 def strip_tags(s):
     return re.sub(r"<[^>]+>", "", s)
+
+
+def _home_slice(start_sub, end_anchor):
+    """Lift a section verbatim out of index.html so area pages reuse the real
+    homepage markup (stats, trust, process) instead of a drifting copy."""
+    src = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
+    a = src.index(start_sub)
+    b = src.index("</section>", src.index(end_anchor, a)) + len("</section>")
+    frag = src[a:b]
+    # These bands must render at rest here: the homepage's scroll-reveal observer
+    # does not drive them on generated pages, which left the section at opacity 0.
+    frag = re.sub(r'\s*data-reveal="1"', "", frag)
+    # Drop the decorative WebGL canvas -- not worth a GL context on 21 pages.
+    frag = re.sub(r'<canvas[^>]*data-gl="1"[^>]*>\s*</canvas>', "", frag)
+    return frag
+
+
+def homepage_bands():
+    return {
+        "trust":   _home_slice('<section class="trust-banner"', "We own it"),
+        "stats":   _home_slice('<section class="u042"', "stat-google-arrow"),
+        "process": _home_slice('<section class="u066"', "data-process-grid"),
+    }
+
+
+def cta_band(area):
+    wa = ("https://wa.me/918208093011?text="
+          "Hi%20Twin%20Space%20Studio%2C%20I%27d%20like%20to%20book%20a%20consultation.")
+    return f"""<section class="area-cta">
+<div class="area-cta-inner">
+<p class="area-hero-eyebrow">Start a project</p>
+<h2>Talk to us about your home in {esc(area)}.</h2>
+<p class="area-cta-sub">A first conversation costs nothing and usually settles the two questions everyone
+has: what this will cost, and how long it will take.</p>
+<div class="area-hero-cta">
+<a class="u031" href="tel:+918208093011">Pooja &middot; 82080 93011 <span class="u032">&#8599;</span></a>
+<a class="u031" href="tel:+918888177217">Dimple &middot; 88881 77217 <span class="u032">&#8599;</span></a>
+<a class="u033" href="{wa}" rel="noopener" target="_blank">WhatsApp us</a>
+</div>
+</div>
+</section>"""
+
+
+def split_body(body):
+    """Split the article at a mid-point <h2> so a full-bleed band can sit between
+    the halves, instead of one unbroken column of prose."""
+    idx = [m.start() for m in re.finditer(r"<h2", body)]
+    if len(idx) < 3:
+        return body, ""
+    cut = idx[len(idx) // 2]
+    return body[:cut], body[cut:]
 
 
 def render_area_enhanced(page):
@@ -253,26 +313,51 @@ def render_area_enhanced(page):
 
     og = f'<meta property="og:image" content="{SITE}{lead_img}">' if lead_img else ""
 
-    # Hero section
-    hero_subtitle = page.get("hero_subtitle", "Transparent pricing. Local expertise. 10–12 weeks.")
-    hero_html = f"""
-<div style="margin: -60px -30px 50px; padding: 60px 30px; background: linear-gradient(135deg, rgba(42,36,30,0.7) 0%, rgba(42,36,30,0.5) 100%), url({esc(lead_img or '/assets/opt/hero-1.jpg')}) center/cover; background-attachment: fixed; min-height: 280px; display: flex; flex-direction: column; justify-content: center; color: white;">
-<p style="font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; margin: 0 0 12px; opacity: 0.9;">Interior Design</p>
-<h1 style="font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 48px; line-height: 1.1; margin: 0 0 16px; max-width: 600px;">{esc(page['h1'])}</h1>
-<p style="font-size: 18px; line-height: 1.6; margin: 0 0 28px; max-width: 600px; opacity: 0.95;">{esc(hero_subtitle)}</p>
-<div style="display: flex; gap: 16px; flex-wrap: wrap;">
-<a href="tel:+918208093011" style="display: inline-block; padding: 12px 24px; background: rgb(176, 141, 87); color: white; text-decoration: none; font-weight: 600; font-size: 13px; letter-spacing: 0.1em; border-radius: 2px; transition: background 200ms;">CALL POOJA · 82080 93011</a>
-<a href="https://wa.me/918208093011?text=Hi%20Twin%20Space%20Studio%2C%20I%27d%20like%20to%20book%20a%20consultation." style="display: inline-block; padding: 12px 24px; background: rgba(255,255,255,0.15); color: white; text-decoration: none; font-weight: 600; font-size: 13px; letter-spacing: 0.1em; border-radius: 2px; border: 1px solid rgba(255,255,255,0.3); transition: all 200ms;">WHATSAPP US</a>
+    # Hero: sits outside .project-page so it is genuinely full-bleed, and reuses
+    # the homepage hero's scrim/type treatment rather than inventing a new one.
+    hero_subtitle = page.get("hero_subtitle", "Transparent pricing, local knowledge and a ten to twelve week programme.")
+    hero_img = page.get("hero_image") or lead_img or "/assets/opt/hero-1.jpg"
+    _m = re.search(r"/assets/opt/([a-f]\d\d)\.jpg$", hero_img)
+    if _m and _m.group(1) in SEO_NAMES:
+        hero_img = "/assets/areas/" + SEO_NAMES[_m.group(1)] + ".jpg"
+    wa = ("https://wa.me/918208093011?text="
+          "Hi%20Twin%20Space%20Studio%2C%20I%27d%20like%20to%20book%20a%20consultation.")
+    hero_html = f"""<section class="area-hero">
+<div class="area-hero-img" style="background-image:url('{hero_img}')"></div>
+<div class="area-hero-scrim"></div>
+<div class="area-hero-scrim-b"></div>
+<div class="area-hero-inner">
+{''.join(crumb_nav)}
+<span class="area-hero-eyebrow">{esc(page.get('eyebrow', 'Interior design'))}</span>
+<h1>{page['h1']}</h1>
+<p class="area-hero-sub">{hero_subtitle}</p>
+<div class="area-hero-cta">
+<a class="u031" href="tel:+918208093011">Call Pooja <span class="u032">↗</span></a>
+<a class="u033" href="{wa}" rel="noopener" target="_blank">WhatsApp us</a>
 </div>
 </div>
-"""
+</section>"""
 
-    # Main body content
-    body = page["body"]
+    # Interleave the homepage's own trust / stats / process bands between halves of
+    # the prose, so the page reads as a page rather than one unbroken column.
+    bands = homepage_bands()
+    top, rest = split_body(page["body"])
+    area_name = page.get("area_name") or page.get("service", "Pune").split(",")[0]
 
-    # Add FAQ section if present
+    blocks = [hero_html, bands["trust"], f'<article class="project-page area-page">{top}</article>']
+    if rest:
+        blocks += [bands["stats"], f'<article class="project-page area-page">{rest}</article>']
+    else:
+        blocks.append(bands["stats"])
+    blocks.append(bands["process"])
     if page.get("faqs"):
-        body += faq_html(page["faqs"])
+        blocks.append(
+            '<section class="area-faq"><div class="area-faq-inner">'
+            f'<p class="u069">Questions</p><h2>Common questions about interiors in {esc(area_name)}</h2>'
+            + faq_html(page["faqs"], heading=False) + "</div></section>"
+        )
+    blocks.append(cta_band(area_name))
+    main_html = "\n".join(blocks)
 
     return f"""<!DOCTYPE html>
 <html lang="en-IN">
@@ -294,17 +379,14 @@ def render_area_enhanced(page):
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/3811d17e-80cb-4332-bd35-dfa1f097b18c.woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/styles.css">
 {ld_tags}
+  <script src="/assets/js/app.js" defer></script>
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="Plb7nEibS4yHwbbbhQEpiw" async></script>
 </head>
 <body>
 {HEADER}
 
 <main>
-<article class="project-page area-page">
-{hero_html}
-{''.join(crumb_nav)}<h1 style="display: none;">{page['h1']}</h1>
-{body}
-</article>
+{main_html}
 </main>
 
 {FOOTER}
@@ -430,6 +512,6 @@ def write(page):
     out = os.path.join(ROOT, page["path"].lstrip("/") + ".html")
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8") as f:
-        f.write(render(page))
+        f.write(render_area_enhanced(page) if page.get("hero_subtitle") else render(page))
     words = len(re.sub(r"\s+", " ", strip_tags(page["body"])).split())
     return out, words

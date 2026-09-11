@@ -19,9 +19,12 @@ PAGES = []
 PAGES.append(dict(
     path="/areas/baner",
     slug="baner",
-    title="Interior Designers in Baner, Pune | Twin Space Studio",
+    area_name="Baner",
+    hero_image="/assets/opt/e01.jpg",
+    hero_subtitle="Our studio is ten minutes away in Mahalunge, and Baner is where we work most often. Full 3 BHK interiors from &#8377;16 lakh, quoted line by line before anything is ordered.",
+    title="Best Interior Designers in Baner, Pune | Twin Space Studio",
     description="Interior designers in Baner, Pune. Turnkey 3 BHK, 4 BHK and duplex interiors in 10-12 weeks, with a transparent line-item quote before work begins.",
-    h1="Interior Designers in Baner, Pune",
+    h1="Best Interior Designers in Baner, Pune",
     service="Baner, Pune",
     og_image="/assets/areas/interior-designers-baner-pune-living-room-swing.jpg",
     crumbs=CRUMBS("Baner", "baner"),
@@ -29,8 +32,8 @@ PAGES.append(dict(
 <p>We are a Pune interior design studio based in Mahalunge, about ten minutes
 from Baner, and Baner is where we work most often. This page covers what homes
 here are actually like, how the three sides of Baner differ, the society
-constraints worth knowing before you start, what a full interior costs, where
-that budget goes, and a duplex we delivered on Baner Road.</p>
+constraints worth knowing before you start, what a full interior costs and where
+that budget goes.</p>
 
 <h2>What Baner homes are like</h2>
 <p>Baner has become the address most people picture when they imagine a modern
@@ -78,42 +81,6 @@ not glare on a screen, and a wall behind you that looks acceptable on a video ca
 In a 3 BHK that usually means the third bedroom does two jobs, which is a planning
 problem before it is a furniture one.</p>
 
-<h2>Society rules, service lifts and working hours</h2>
-<p>Baner's newer towers are generally straightforward to work in, but the societies
-enforce their rules properly. Expect defined working hours — commonly 9am to 6pm,
-with no work on Sundays and often none on public holidays. Expect a booking system
-for the service lift, with slots that other flats are also competing for. Expect
-restrictions on when material can be moved in, frequently a morning-only window.</p>
-<p>Larger societies usually require a refundable deposit, a written scope of work,
-photo identity for every worker on site, and a completion date in writing. Some ask
-for the contractor's undertaking on debris removal before they will issue a gate
-pass at all. None of this is a problem when it is planned for. It becomes one when
-a schedule quietly assumed unrestricted access and then loses a fortnight to a lift
-queue.</p>
-<p>We ask for the society's rules in the first week, before drawings are frozen,
-and build the sequence around them. If the lift can only take material between 10am
-and 1pm, the joinery is broken into loads that fit that window rather than arriving
-as one truck that has to go away again.</p>
-<p>The older low-rise buildings toward Pashan Road bring a different set of
-questions — where the plumbing actually runs, whether a wall is structural, and how
-much the slab will take. We check these before drawings are finalised rather than
-discovering them once carpentry is booked.</p>
-
-<h2>Designing across two levels</h2>
-<p>Baner is where we most often work on duplexes, and they need a different approach
-from a flat. The risk in a duplex is that it reads as two separate apartments
-connected by a staircase. The way through is one material language carried floor to
-floor, varied rather than repeated exactly.</p>
-<p>In <a href="/projects/baner-duplex">Aniket Marathe's 3 BHK duplex</a> we used
-marble, teak slats and brass on both levels, and built and lit the staircase and the
-television wall as one continuous feature. A swing was worked into the living space,
-and a study nook and work-desk bedroom support working from home. The result reads
-as one home rather than two stacked flats.</p>
-<p>Two things are worth knowing before you start a duplex. The staircase is the most
-expensive square metre in the house and the hardest to change later, so it gets
-decided first. And the upper floor almost always needs its own service point — a
-small pantry, or at minimum a water line — because carrying everything up becomes
-tiring in a way that no one predicts at drawing stage.</p>
 """ + gallery(["e03", "e07", "e04", "e02", "e06", "e10", "e08", "e11"]) + """
 <h2>What a Baner interior costs</h2>
 <p>A full 2 BHK interior runs &#8377;12&ndash;16 lakh and a full 3 BHK
@@ -181,7 +148,7 @@ apartments to duplexes, and our service pages go deeper on
         ("Do you handle society permissions and working-hour restrictions?",
          "Yes. Baner societies typically enforce 9am to 6pm working hours, a service-lift booking system, a refundable deposit and worker identity records. We collect the society's rules in the first week and build the schedule around them rather than negotiating mid-project."),
         ("Do you work on duplexes and 4 BHK homes in Baner?",
-         "Yes. Baner is where we most often design across two levels. Our delivered duplex on Baner Road carried one material language floor to floor so the home reads as a single residence rather than two stacked flats."),
+         "Yes. Baner is where we most often design across two levels, and the approach is to carry one material language floor to floor so the home reads as a single residence rather than two stacked flats."),
         ("Can you work in older buildings near Pashan Road without a service lift?",
          "Yes, and we price it properly. Where material has to be carried, we break joinery into smaller loads and schedule around the society's material-movement window. The cost difference is stated in the quote rather than discovered on site."),
         ("Is the furniture built on site or brought in ready-made?",
@@ -193,9 +160,12 @@ apartments to duplexes, and our service pages go deeper on
 PAGES.append(dict(
     path="/areas/kothrud",
     slug="kothrud",
-    title="Interior Designers in Kothrud, Pune | Twin Space Studio",
+    area_name="Kothrud",
+    hero_image="/assets/opt/a01.jpg",
+    hero_subtitle="Established societies, older buildings and renovation done with the family still living in the flat. We survey before we quote, and we say when something is worth keeping.",
+    title="Best Interior Designers in Kothrud, Pune | Twin Space Studio",
     description="Interior designers in Kothrud, Pune. Renovations and turnkey interiors for established societies and redevelopment flats, in 10-12 weeks with a line-item quote.",
-    h1="Interior Designers in Kothrud, Pune",
+    h1="Best Interior Designers in Kothrud, Pune",
     service="Kothrud, Pune",
     og_image="/assets/areas/interior-designers-kothrud-pune-living-room.jpg",
     crumbs=CRUMBS("Kothrud", "kothrud"),
@@ -354,9 +324,12 @@ walls are open and something unexpected has appeared.</p>
 PAGES.append(dict(
     path="/areas/balewadi",
     slug="balewadi",
-    title="Interior Designers in Balewadi, Pune | Twin Space Studio",
+    area_name="Balewadi",
+    hero_image="/assets/opt/d03.jpg",
+    hero_subtitle="Gated townships around Balewadi High Street, and the question almost every owner asks first: can the kitchen wall come down. Usually yes, and here is what it costs.",
+    title="Best Interior Designers in Balewadi, Pune | Twin Space Studio",
     description="Interior designers in Balewadi, Pune. Turnkey 2 BHK and 3 BHK interiors for gated townships near Balewadi High Street, in 10-12 weeks with a line-item quote.",
-    h1="Interior Designers in Balewadi, Pune",
+    h1="Best Interior Designers in Balewadi, Pune",
     service="Balewadi, Pune",
     og_image="/assets/opt/d01.jpg",
     crumbs=CRUMBS("Balewadi", "balewadi"),
