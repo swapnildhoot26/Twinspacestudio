@@ -15,6 +15,8 @@ PAGES = []
 # ------------------------------------------------- MASTER COST GUIDE
 PAGES.append(dict(
     path="/guides/interior-design-cost-pune",
+    guide=True,
+    eyebrow="Guide",
     title="Interior Design Cost in Pune (2026) | Twin Space Studio",
     description="What a full home interior actually costs in Pune in 2026 — 2 BHK &#8377;12-16 lakh, 3 BHK &#8377;16-21 lakh — and where every rupee of that budget goes.",
     h1="What Interior Design Costs in Pune",
@@ -137,6 +139,8 @@ never added to a final bill.</p>
 # ------------------------------------------------- 2 BHK COST
 PAGES.append(dict(
     path="/guides/2-bhk-interior-cost-pune",
+    guide=True,
+    eyebrow="Guide",
     title="2 BHK Interior Cost in Pune (2026) | Twin Space Studio",
     description="What a full 2 BHK interior costs in Pune in 2026: &#8377;12-16 lakh, broken down room by room, with what to protect and what to defer on a tight budget.",
     h1="2 BHK Interior Cost in Pune",
@@ -237,6 +241,8 @@ detail.</p>
 # ------------------------------------------------- 3 BHK COST
 PAGES.append(dict(
     path="/guides/3-bhk-interior-cost-pune",
+    guide=True,
+    eyebrow="Guide",
     title="3 BHK Interior Cost in Pune (2026) | Twin Space Studio",
     description="What a full 3 BHK interior costs in Pune in 2026: &#8377;16-21 lakh, broken down room by room, with guidance on planning the third bedroom.",
     h1="3 BHK Interior Cost in Pune",
@@ -335,6 +341,8 @@ spent</a>, <a href="/services/3-bhk-interior-design">our 3 BHK service page</a>,
 # ------------------------------------------------- MODULAR KITCHEN COST
 PAGES.append(dict(
     path="/guides/modular-kitchen-cost-pune",
+    guide=True,
+    eyebrow="Guide",
     title="Modular Kitchen Cost in Pune (2026) | Twin Space Studio",
     description="What a modular kitchen costs in Pune in 2026, what drives the price, and which parts of the specification are worth protecting when the budget is tight.",
     h1="Modular Kitchen Cost in Pune",
@@ -441,6 +449,8 @@ electrical rerouting, and the wall must be confirmed non-structural first.</p>
 # ------------------------------------------------- WARDROBE COST
 PAGES.append(dict(
     path="/guides/wardrobe-cost-pune",
+    guide=True,
+    eyebrow="Guide",
     title="Wardrobe Cost in Pune (2026) | Twin Space Studio",
     description="What built-in wardrobes cost in Pune in 2026, sliding versus openable, and the internal decisions that determine whether storage actually gets used.",
     h1="Wardrobe Cost in Pune",

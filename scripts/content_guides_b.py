@@ -9,6 +9,8 @@ PAGES = []
 # ------------------------------------------------- FALSE CEILING COST
 PAGES.append(dict(
     path="/guides/false-ceiling-cost-pune",
+    guide=True,
+    eyebrow="Guide",
     title="False Ceiling and Lighting Cost in Pune (2026) | Twin Space Studio",
     description="What false ceilings and lighting cost in Pune in 2026, where a ceiling is worth doing, and where it quietly takes height you should have kept.",
     h1="False Ceiling and Lighting Cost in Pune",
@@ -107,6 +109,8 @@ costs in Pune</a>.</p>
 # ------------------------------------------------- HIDDEN COSTS
 PAGES.append(dict(
     path="/guides/hidden-costs-interior-design",
+    guide=True,
+    eyebrow="Guide",
     title="The Interior Costs People Forget to Budget For | Twin Space Studio",
     description="The lines that turn a &#8377;14 lakh interior quote into a &#8377;17 lakh bill in Pune — and how to get them into the number before you sign.",
     h1="The Costs People Forget to Budget For",
@@ -211,6 +215,8 @@ because we survey before quoting rather than after.</p>
 # ------------------------------------------------- PROCESS
 PAGES.append(dict(
     path="/guides/interior-design-process",
+    guide=True,
+    eyebrow="Guide",
     title="Our Interior Design Process, Step by Step | Twin Space Studio",
     description="The six stages of a Twin Space Studio project in Pune, what happens in each, what we need from you, and what you receive at the end of every stage.",
     h1="How an Interior Project Actually Runs",
@@ -312,6 +318,8 @@ which routinely costs four to five weeks for no design reason.</p>
 # ------------------------------------------------- TIMELINE
 PAGES.append(dict(
     path="/guides/interior-design-timeline",
+    guide=True,
+    eyebrow="Guide",
     title="How Long a Full Home Interior Takes in Pune | Twin Space Studio",
     description="Ten to twelve weeks, week by week — what happens when during a Pune home interior, and the three things that actually make a project run late.",
     h1="How Long a Home Interior Takes",
@@ -411,6 +419,8 @@ and <a href="/guides/interior-design-cost-pune">what it costs</a>.</p>
 # ------------------------------------------------- PAYMENT SCHEDULE
 PAGES.append(dict(
     path="/guides/interior-design-payment-schedule",
+    guide=True,
+    eyebrow="Guide",
     title="How Interior Design Payments Are Staged | Twin Space Studio",
     description="How we stage payments on a Pune interior project, why they run against milestones rather than dates, and what to watch for in any payment schedule.",
     h1="How Payments Are Staged",

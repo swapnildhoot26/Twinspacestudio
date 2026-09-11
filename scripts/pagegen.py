@@ -319,7 +319,11 @@ def render_area_enhanced(page):
 
     # Hero: sits outside .project-page so it is genuinely full-bleed, and reuses
     # the homepage hero's scrim/type treatment rather than inventing a new one.
-    hero_subtitle = page.get("hero_subtitle", "Transparent pricing, local knowledge and a ten to twelve week programme.")
+    hero_subtitle = page.get("hero_subtitle") or (
+        desc if page.get("guide") else
+        "Transparent pricing, local knowledge and a ten to twelve week programme.")
+    # guides have no project grid of their own, so point at the homepage one
+    projects_href = "/#projects" if page.get("guide") else "#projects"
     hero_img = page.get("hero_image") or lead_img or "/assets/opt/hero-1.jpg"
     _m = re.search(r"/assets/opt/([a-f]\d\d)\.jpg$", hero_img)
     if _m and _m.group(1) in SEO_NAMES:
@@ -337,13 +341,15 @@ def render_area_enhanced(page):
 <p class="area-hero-sub">{hero_subtitle}</p>
 <div class="area-hero-cta u030" data-hero-cta="1">
 <a class="u031" href="{wa}" rel="noopener" target="_blank">Book consultation <span class="u032">&#8599;</span></a>
-<a class="u033" href="#projects">View projects</a>
+<a class="u033" href="{projects_href}">View projects</a>
 </div>
 </div>
 </section>"""
 
     # Order: hero -> trust -> six projects -> stats -> process -> area copy -> FAQ -> CTA
     bands = homepage_bands()
+    body = re.sub(r'<div class="project-gallery">.*?</div>\s*(?:<p class="gallery-note">.*?</p>)?',
+                  "", page["body"], flags=re.S)
     area_name = page.get("area_name") or page.get("service", "Pune").split(",")[0]
     blocks = [
         hero_html,
@@ -351,7 +357,7 @@ def render_area_enhanced(page):
         projects_grid(),
         bands["stats"],
         bands["process"],
-        f'<section class="area-copy"><article class="project-page area-page">{page["body"]}</article></section>',
+        f'<section class="area-copy"><article class="project-page area-page">{body}</article></section>',
     ]
     if page.get("faqs"):
         blocks.append(
@@ -360,6 +366,19 @@ def render_area_enhanced(page):
             + faq_html(page["faqs"], heading=False) + "</div></section>"
         )
     blocks.append(closing_cta())
+
+    if page.get("guide"):
+        # Guides are reference reading, not landing pages: keep their own
+        # photographs and skip the projects / stats / process bands.
+        blocks = [hero_html,
+                  f'<section class="area-copy"><article class="project-page area-page">{page["body"]}</article></section>']
+        if page.get("faqs"):
+            blocks.append(
+                '<section class="area-faq"><div class="area-faq-inner">'
+                '<p class="u069">Questions</p><h2>Common questions</h2>'
+                + faq_html(page["faqs"], heading=False) + "</div></section>")
+        blocks.append(closing_cta())
+
     main_html = "\n".join(blocks)
     footer_html = homepage_footer()
 
@@ -505,7 +524,7 @@ def render(page):
 </article>
 </main>
 
-{FOOTER}
+{homepage_footer()}
 {FAQ_SCRIPT}
 </body>
 </html>
@@ -516,6 +535,6 @@ def write(page):
     out = os.path.join(ROOT, page["path"].lstrip("/") + ".html")
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8") as f:
-        f.write(render_area_enhanced(page) if page.get("landing") else render(page))
+        f.write(render_area_enhanced(page) if (page.get("landing") or page.get("guide")) else render(page))
     words = len(re.sub(r"\s+", " ", strip_tags(page["body"])).split())
     return out, words

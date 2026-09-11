@@ -9,6 +9,8 @@ PAGES = []
 # ------------------------------------------------- SOCIETY RULES
 PAGES.append(dict(
     path="/guides/society-rules-interior-work-pune",
+    guide=True,
+    eyebrow="Guide",
     title="Society Rules for Interior Work in Pune | Twin Space Studio",
     description="Working hours, service lift bookings, deposits and what most Pune societies will not let you change — everything to confirm before a fit-out starts.",
     h1="Society Rules for Interior Work in Pune",
@@ -130,6 +132,8 @@ to the committee can stop a site faster than anything else on this page.</p>
 # ------------------------------------------------- POSSESSION CHECKLIST
 PAGES.append(dict(
     path="/guides/new-flat-possession-checklist",
+    guide=True,
+    eyebrow="Guide",
     title="New Flat Possession Checklist, Pune | Twin Space Studio",
     description="What to check and get the builder to fix before interior work starts in a new Pune flat — the snag list that saves money once joinery is in.",
     h1="What to Check Before Interior Work Starts",
@@ -233,6 +237,8 @@ takes</a>.</p>
 # ------------------------------------------------- PLYWOOD AND MATERIALS
 PAGES.append(dict(
     path="/guides/plywood-and-materials",
+    guide=True,
+    eyebrow="Guide",
     title="Plywood, Laminate and Materials Explained | Twin Space Studio",
     description="What BWP, MR and BWR plywood actually mean, where each belongs in a Pune home, and why the carcass matters more than the shutter you can see.",
     h1="Plywood, Laminate and What Actually Matters",
@@ -345,6 +351,8 @@ lower price.</p>
 # ------------------------------------------------- RENOVATION VS NEW
 PAGES.append(dict(
     path="/guides/renovation-vs-new-flat",
+    guide=True,
+    eyebrow="Guide",
     title="Renovating an Older Flat in Pune | Twin Space Studio",
     description="How renovating an older Pune flat differs from fitting out a new one — what to survey, what to keep, what it adds to the cost, and what it adds to the time.",
     h1="Renovating an Older Flat",
@@ -455,6 +463,8 @@ costs in Pune</a>.</p>
 # ------------------------------------------------- LIVING IN DURING RENOVATION
 PAGES.append(dict(
     path="/guides/living-in-during-renovation",
+    guide=True,
+    eyebrow="Guide",
     title="Living in the Flat During a Renovation | Twin Space Studio",
     description="How we phase a Pune renovation so a family can stay in the home — dust control, which room goes last, and what it adds to the programme.",
     h1="Living in the Flat During a Renovation",
