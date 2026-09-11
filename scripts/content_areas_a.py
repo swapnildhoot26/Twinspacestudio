@@ -19,6 +19,7 @@ PAGES = []
 PAGES.append(dict(
     path="/areas/baner",
     slug="baner",
+    landing=True,
     area_name="Baner",
     hero_image="/assets/opt/e01.jpg",
     hero_subtitle="Our studio is ten minutes away in Mahalunge, and Baner is where we work most often. Full 3 BHK interiors from &#8377;16 lakh, quoted line by line before anything is ordered.",
@@ -28,7 +29,7 @@ PAGES.append(dict(
     service="Baner, Pune",
     og_image="/assets/areas/interior-designers-baner-pune-living-room-swing.jpg",
     crumbs=CRUMBS("Baner", "baner"),
-    body=gallery(["e09", "e01", "e05"]) + """
+    body="""
 <p>We are a Pune interior design studio based in Mahalunge, about ten minutes
 from Baner, and Baner is where we work most often. This page covers what homes
 here are actually like, how the three sides of Baner differ, the society
@@ -64,24 +65,6 @@ early-2000s buildings now going through their second round of interiors. Here th
 questions are about what is behind the wall rather than what goes on it — original
 plumbing, undersized electrical loads, and slabs that have already been chased once.</p>
 
-<h2>What Baner briefs usually include</h2>
-<p>Three things come up in almost every Baner home. A properly specified modular
-kitchen, because the builder kitchen is invariably the first thing to fall short.
-A built-in entertainment wall in the living room, usually with concealed wiring
-and integrated lighting. And a balcony treated as an extra room rather than a
-place to dry clothes — decking, seating, and lighting that makes it usable after
-dark.</p>
-<p>Beyond that, storage decides how the home lives. Wardrobes taken to the ceiling
-rather than stopping at a loft, a full-height utility unit near the kitchen, and a
-planned drop at the entry so the foyer never accumulates. These are unglamorous
-decisions that matter more day to day than any feature wall.</p>
-<p>A fourth request has become near-universal since 2020: somewhere real to work.
-Not a laptop on the dining table, but a desk with a power point, a light that does
-not glare on a screen, and a wall behind you that looks acceptable on a video call.
-In a 3 BHK that usually means the third bedroom does two jobs, which is a planning
-problem before it is a furniture one.</p>
-
-""" + gallery(["e03", "e07", "e04", "e02", "e06", "e10", "e08", "e11"]) + """
 <h2>What a Baner interior costs</h2>
 <p>A full 2 BHK interior runs &#8377;12&ndash;16 lakh and a full 3 BHK
 &#8377;16&ndash;21 lakh. Duplex and 4 BHK projects are quoted on scope, since the
@@ -94,48 +77,8 @@ you would rather spend it elsewhere. The most common trade-off we discuss in Ban
 is putting money into kitchen internals and wardrobe hardware — the parts you touch
 daily — rather than into additional panelling.</p>
 
-<h2>Where the budget actually goes</h2>
-<p>In a typical Baner 3 BHK, joinery is the largest single line: the kitchen,
-wardrobes, the television unit and the entry storage together account for roughly
-half the project. False ceilings and lighting take another fifth. Loose furniture,
-soft furnishing and styling take about a sixth. The remainder covers electrical work,
-painting, plumbing changes, hardware and site supervision.</p>
-<p>That distribution is worth knowing because it tells you where a cheaper quote has
-usually been cheapened. Two quotes can be twenty per cent apart with an identical
-drawing set, and the difference sits almost entirely in the parts you cannot see:
-the carcass material, the hinge and channel brands, the edge banding, and whether
-the back of a wardrobe is a proper panel or a sheet of hardboard.</p>
-<p>We build carpentry on site rather than shipping in flat-pack, which is slower to
-photograph and better to live with — the fit against an out-of-square Baner wall is
-made in place instead of covered with a filler strip. You can read more in our guide
-to """ + COST_LINKS + """.</p>
-
-<h2>Timelines, and what actually moves them</h2>
-<p>Ten to twelve weeks is the honest figure for a full home in Baner, measured from
-approved drawings rather than from the first conversation. Duplexes run a little
-longer, usually thirteen to fifteen weeks.</p>
-<p>Three things move that date, and none of them is design. Society access
-restrictions, which we plan around. Client-side decisions that arrive late —
-particularly stone selection and the final electrical layout, both of which block
-work behind them. And material lead times on anything imported, which is why we
-flag those items in week one rather than week six.</p>
-
 <h2>Working with us in Baner</h2>
-<p>Being ten minutes away matters more during execution than at the design stage.
-When a site decision is needed, we can be there the same morning rather than the
-following week, which is usually the difference between a day lost and a day kept.
-Both founders visit site; you are not handed to a project manager you have never
-met once the drawings are signed.</p>
-<p>We also work across <a href="/areas/balewadi">Balewadi</a>,
-<a href="/areas/sus">Sus</a>, <a href="/areas/pashan">Pashan</a>,
-<a href="/areas/mahalunge">Mahalunge</a>, <a href="/areas/aundh">Aundh</a> and
-<a href="/areas-we-serve">the rest of Pune and PCMC</a>. If you want to see the
-range first, our <a href="/#projects">recent projects</a> cover homes from 2 BHK
-apartments to duplexes, and our service pages go deeper on
-<a href="/services/modular-kitchens">modular kitchens</a>,
-<a href="/services/wardrobes-storage">wardrobes and storage</a> and
-<a href="/services/turnkey-interiors">turnkey execution</a>.</p>
-
+<p>We also work in <a href="/areas/balewadi">Balewadi</a>, <a href="/areas/pashan">Pashan</a>, <a href="/areas/sus">Sus</a>, <a href="/areas/aundh">Aundh</a> and <a href="/areas-we-serve">across Pune and PCMC</a>. See also <a href="/services/3-bhk-interior-design">3 BHK interior design</a>, <a href="/services/modular-kitchens">modular kitchens</a> and <a href="/guides/interior-design-cost-pune">what a full interior costs in Pune</a>.</p>
 <p>To talk through a home in Baner, call Pooja Dhoot on
 <a href="tel:+918208093011">+91 82080 93011</a> or Dimple Marathe on
 <a href="tel:+918888177217">+91 88881 77217</a>.</p>
@@ -163,9 +106,9 @@ PAGES.append(dict(
     area_name="Kothrud",
     hero_image="/assets/opt/a01.jpg",
     hero_subtitle="Established societies, older buildings and renovation done with the family still living in the flat. We survey before we quote, and we say when something is worth keeping.",
-    title="Best Interior Designers in Kothrud, Pune | Twin Space Studio",
+    title="Interior Designers in Kothrud, Pune | Twin Space Studio",
     description="Interior designers in Kothrud, Pune. Renovations and turnkey interiors for established societies and redevelopment flats, in 10-12 weeks with a line-item quote.",
-    h1="Best Interior Designers in Kothrud, Pune",
+    h1="Interior Designers in Kothrud, Pune",
     service="Kothrud, Pune",
     og_image="/assets/areas/interior-designers-kothrud-pune-living-room.jpg",
     crumbs=CRUMBS("Kothrud", "kothrud"),
@@ -327,9 +270,9 @@ PAGES.append(dict(
     area_name="Balewadi",
     hero_image="/assets/opt/d03.jpg",
     hero_subtitle="Gated townships around Balewadi High Street, and the question almost every owner asks first: can the kitchen wall come down. Usually yes, and here is what it costs.",
-    title="Best Interior Designers in Balewadi, Pune | Twin Space Studio",
+    title="Interior Designers in Balewadi, Pune | Twin Space Studio",
     description="Interior designers in Balewadi, Pune. Turnkey 2 BHK and 3 BHK interiors for gated townships near Balewadi High Street, in 10-12 weeks with a line-item quote.",
-    h1="Best Interior Designers in Balewadi, Pune",
+    h1="Interior Designers in Balewadi, Pune",
     service="Balewadi, Pune",
     og_image="/assets/opt/d01.jpg",
     crumbs=CRUMBS("Balewadi", "balewadi"),

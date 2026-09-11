@@ -155,13 +155,7 @@ def esc(s):
 
 
 def gallery(ids, note=None):
-    """Render a figure row from photo ids.
-
-    The whole image is the link to the project it came from, so the caption can
-    stay short and generic. Attribution is still honest -- the alt text and the
-    link destination both name the real project -- it is just one click away
-    rather than spelled out under every photo.
-    """
+    """Render a figure row from photo ids. Captions name the real project."""
     figs = []
     for pid in ids:
         w, h, alt, cap = PHOTOS[pid]
@@ -169,13 +163,10 @@ def gallery(ids, note=None):
         jpg, webp = img_paths(pid)
         figs.append(
             '<figure class="project-shot">'
-            f'<a class="shot-link" href="{url}" aria-label="{esc(cap)} — see this project">'
             f'<picture><source srcset="{webp}" type="image/webp"/>'
             f'<img src="{jpg}" alt="{esc(alt)} — {esc(proj)}, by Twin Space Studio" '
             f'width="{w}" height="{h}" loading="lazy"/></picture>'
-            '<span class="shot-hint" aria-hidden="true">View project &#8599;</span>'
-            '</a>'
-            f'<figcaption>{esc(cap)}</figcaption>'
+            f'<figcaption>{esc(cap)} &mdash; <a href="{url}">{esc(proj)}</a></figcaption>'
             '</figure>'
         )
     out = '<div class="project-gallery">' + "".join(figs) + "</div>"
@@ -199,19 +190,48 @@ def strip_tags(s):
     return re.sub(r"<[^>]+>", "", s)
 
 
-def _home_slice(start_sub, end_anchor):
+def _home_slice(start_sub, end_anchor, close="</section>"):
     """Lift a section verbatim out of index.html so area pages reuse the real
     homepage markup (stats, trust, process) instead of a drifting copy."""
     src = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
     a = src.index(start_sub)
-    b = src.index("</section>", src.index(end_anchor, a)) + len("</section>")
+    b = src.index(close, src.index(end_anchor, a)) + len(close)
     frag = src[a:b]
     # These bands must render at rest here: the homepage's scroll-reveal observer
     # does not drive them on generated pages, which left the section at opacity 0.
     frag = re.sub(r'\s*data-reveal="1"', "", frag)
     # Drop the decorative WebGL canvas -- not worth a GL context on 21 pages.
     frag = re.sub(r'<canvas[^>]*data-gl="1"[^>]*>\s*</canvas>', "", frag)
+    # index.html references assets relatively; from /areas/<slug> that resolves wrong
+    frag = re.sub(r'(src|srcset|href)="assets/', r'\1="/assets/', frag)
     return frag
+
+
+PROJECT_URLS = {
+    "Aniket Marathe": "/projects/baner-duplex",
+    "Chinmay Patil": "/projects/kothrud-3bhk",
+    "Sachin Sharma": "/projects/kondhwa-4bhk",
+    "Akshay &amp; Radhika Soni": "/projects/kharadi-3bhk",
+    "Ashish Kadhane": "/projects/balewadi-2bhk",
+    "Bhavik Shah": "/projects/punawale-2bhk",
+}
+
+
+def projects_grid():
+    """The homepage's six-project grid, with its modal buttons turned into real
+    links -- the dialog they open only exists on the homepage."""
+    frag = _home_slice('<section class="u048" data-reveal="1" id="projects">', "Bhavik Shah")
+
+    def to_link(m):
+        card = m.group(0)
+        name = re.search(r"<h3[^>]*><span[^>]*>(.*?)</span></h3>", card)
+        url = PROJECT_URLS.get(name.group(1)) if name else None
+        if not url:
+            raise SystemExit("projects_grid: no URL mapped for %r" % (name and name.group(1)))
+        card = re.sub(r"^<button[^>]*>", f'<a class="u082" href="{url}">', card)
+        return card[: -len("</button>")] + "</a>"
+
+    return re.sub(r"<button[\s\S]*?</button>", to_link, frag)
 
 
 def homepage_bands():
@@ -222,32 +242,16 @@ def homepage_bands():
     }
 
 
-def cta_band(area):
-    wa = ("https://wa.me/918208093011?text="
-          "Hi%20Twin%20Space%20Studio%2C%20I%27d%20like%20to%20book%20a%20consultation.")
-    return f"""<section class="area-cta">
-<div class="area-cta-inner">
-<p class="area-hero-eyebrow">Start a project</p>
-<h2>Talk to us about your home in {esc(area)}.</h2>
-<p class="area-cta-sub">A first conversation costs nothing and usually settles the two questions everyone
-has: what this will cost, and how long it will take.</p>
-<div class="area-hero-cta">
-<a class="u031" href="tel:+918208093011">Pooja &middot; 82080 93011 <span class="u032">&#8599;</span></a>
-<a class="u031" href="tel:+918888177217">Dimple &middot; 88881 77217 <span class="u032">&#8599;</span></a>
-<a class="u033" href="{wa}" rel="noopener" target="_blank">WhatsApp us</a>
-</div>
-</div>
-</section>"""
+def closing_cta():
+    """The homepage's own closing CTA band."""
+    return _home_slice('<section class="u117"', "Message us on WhatsApp")
 
 
-def split_body(body):
-    """Split the article at a mid-point <h2> so a full-bleed band can sit between
-    the halves, instead of one unbroken column of prose."""
-    idx = [m.start() for m in re.finditer(r"<h2", body)]
-    if len(idx) < 3:
-        return body, ""
-    cut = idx[len(idx) // 2]
-    return body[:cut], body[cut:]
+def homepage_footer():
+    """The full homepage footer -- generated pages otherwise get a two-line stub."""
+    # anchor on the opening tag itself: footers do not nest, so the next
+    # </footer> is this one's, and the slice survives edits to the footer's tail
+    return _home_slice('<footer class="u123"', '<footer class="u123"', close="</footer>")
 
 
 def render_area_enhanced(page):
@@ -331,33 +335,33 @@ def render_area_enhanced(page):
 <span class="area-hero-eyebrow">{esc(page.get('eyebrow', 'Interior design'))}</span>
 <h1>{page['h1']}</h1>
 <p class="area-hero-sub">{hero_subtitle}</p>
-<div class="area-hero-cta">
-<a class="u031" href="tel:+918208093011">Call Pooja <span class="u032">↗</span></a>
-<a class="u033" href="{wa}" rel="noopener" target="_blank">WhatsApp us</a>
+<div class="area-hero-cta u030" data-hero-cta="1">
+<a class="u031" href="{wa}" rel="noopener" target="_blank">Book consultation <span class="u032">&#8599;</span></a>
+<a class="u033" href="#projects">View projects</a>
 </div>
 </div>
 </section>"""
 
-    # Interleave the homepage's own trust / stats / process bands between halves of
-    # the prose, so the page reads as a page rather than one unbroken column.
+    # Order: hero -> trust -> six projects -> stats -> process -> area copy -> FAQ -> CTA
     bands = homepage_bands()
-    top, rest = split_body(page["body"])
     area_name = page.get("area_name") or page.get("service", "Pune").split(",")[0]
-
-    blocks = [hero_html, bands["trust"], f'<article class="project-page area-page">{top}</article>']
-    if rest:
-        blocks += [bands["stats"], f'<article class="project-page area-page">{rest}</article>']
-    else:
-        blocks.append(bands["stats"])
-    blocks.append(bands["process"])
+    blocks = [
+        hero_html,
+        bands["trust"],
+        projects_grid(),
+        bands["stats"],
+        bands["process"],
+        f'<section class="area-copy"><article class="project-page area-page">{page["body"]}</article></section>',
+    ]
     if page.get("faqs"):
         blocks.append(
             '<section class="area-faq"><div class="area-faq-inner">'
             f'<p class="u069">Questions</p><h2>Common questions about interiors in {esc(area_name)}</h2>'
             + faq_html(page["faqs"], heading=False) + "</div></section>"
         )
-    blocks.append(cta_band(area_name))
+    blocks.append(closing_cta())
     main_html = "\n".join(blocks)
+    footer_html = homepage_footer()
 
     return f"""<!DOCTYPE html>
 <html lang="en-IN">
@@ -389,7 +393,7 @@ def render_area_enhanced(page):
 {main_html}
 </main>
 
-{FOOTER}
+{footer_html}
 {FAQ_SCRIPT}
 </body>
 </html>
@@ -512,6 +516,6 @@ def write(page):
     out = os.path.join(ROOT, page["path"].lstrip("/") + ".html")
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8") as f:
-        f.write(render_area_enhanced(page) if page.get("hero_subtitle") else render(page))
+        f.write(render_area_enhanced(page) if page.get("landing") else render(page))
     words = len(re.sub(r"\s+", " ", strip_tags(page["body"])).split())
     return out, words
