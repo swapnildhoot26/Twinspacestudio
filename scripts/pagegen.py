@@ -190,6 +190,130 @@ def strip_tags(s):
     return re.sub(r"<[^>]+>", "", s)
 
 
+def render_area_enhanced(page):
+    """Enhanced area page with hero, structured sections, portfolio, CTAs.
+
+    page dict should include:
+    - Standard: path, title, description, h1, og_image, crumbs, faqs
+    - Enhanced: hero_subtitle, area_why, process_text, portfolio_ids, why_us_points
+    """
+    url = SITE + page["path"]
+    title = page["title"]
+    desc = page["description"]
+    lead_img = page.get("og_image")
+
+    # Build schema markup
+    ld = []
+    svc = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Residential interior design",
+        "name": strip_tags(page["h1"]),
+        "url": url,
+        "provider": {"@id": SITE + "/#business"},
+        "areaServed": {"@type": "Place", "name": page.get("service", "Pune")},
+    }
+    if lead_img:
+        svc["image"] = [SITE + lead_img]
+    ld.append(svc)
+
+    ld.append({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "name": n,
+             "item": SITE + u if u else url}
+            for i, (n, u) in enumerate(page["crumbs"])
+        ],
+    })
+    if page.get("faqs"):
+        ld.append({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {"@type": "Question", "name": q,
+                 "acceptedAnswer": {"@type": "Answer", "text": strip_tags(a)}}
+                for q, a in page["faqs"]
+            ],
+        })
+
+    ld_tags = "\n".join(
+        '<script type="application/ld+json">' + json.dumps(x, ensure_ascii=False, separators=(",", ":")) + "</script>"
+        for x in ld
+    )
+
+    # Breadcrumbs
+    crumb_nav = ['<nav class="crumbs" aria-label="Breadcrumb">']
+    for i, (n, u) in enumerate(page["crumbs"]):
+        last = i == len(page["crumbs"]) - 1
+        crumb_nav.append(f"<span>{esc(n)}</span>" if last else f'<a href="{u}">{esc(n)}</a>')
+        if not last:
+            crumb_nav.append(" <span>/</span> ")
+    crumb_nav.append("</nav>")
+
+    og = f'<meta property="og:image" content="{SITE}{lead_img}">' if lead_img else ""
+
+    # Hero section
+    hero_subtitle = page.get("hero_subtitle", "Transparent pricing. Local expertise. 10–12 weeks.")
+    hero_html = f"""
+<div style="margin: -60px -30px 50px; padding: 60px 30px; background: linear-gradient(135deg, rgba(42,36,30,0.7) 0%, rgba(42,36,30,0.5) 100%), url({esc(lead_img or '/assets/opt/hero-1.jpg')}) center/cover; background-attachment: fixed; min-height: 280px; display: flex; flex-direction: column; justify-content: center; color: white;">
+<p style="font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; margin: 0 0 12px; opacity: 0.9;">Interior Design</p>
+<h1 style="font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 48px; line-height: 1.1; margin: 0 0 16px; max-width: 600px;">{esc(page['h1'])}</h1>
+<p style="font-size: 18px; line-height: 1.6; margin: 0 0 28px; max-width: 600px; opacity: 0.95;">{esc(hero_subtitle)}</p>
+<div style="display: flex; gap: 16px; flex-wrap: wrap;">
+<a href="tel:+918208093011" style="display: inline-block; padding: 12px 24px; background: rgb(176, 141, 87); color: white; text-decoration: none; font-weight: 600; font-size: 13px; letter-spacing: 0.1em; border-radius: 2px; transition: background 200ms;">CALL POOJA · 82080 93011</a>
+<a href="https://wa.me/918208093011?text=Hi%20Twin%20Space%20Studio%2C%20I%27d%20like%20to%20book%20a%20consultation." style="display: inline-block; padding: 12px 24px; background: rgba(255,255,255,0.15); color: white; text-decoration: none; font-weight: 600; font-size: 13px; letter-spacing: 0.1em; border-radius: 2px; border: 1px solid rgba(255,255,255,0.3); transition: all 200ms;">WHATSAPP US</a>
+</div>
+</div>
+"""
+
+    # Main body content
+    body = page["body"]
+
+    # Add FAQ section if present
+    if page.get("faqs"):
+        body += faq_html(page["faqs"])
+
+    return f"""<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<link rel="canonical" href="{url}">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{url}">
+<meta property="og:site_name" content="Twin Space Studio">
+{og}
+<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/54fef342-67e2-40d0-b750-f6f954aa3bd8.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/8be1dff1-74f1-417f-81c1-598d832e83d2.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/3811d17e-80cb-4332-bd35-dfa1f097b18c.woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/styles.css">
+{ld_tags}
+  <script src="https://analytics.ahrefs.com/analytics.js" data-key="Plb7nEibS4yHwbbbhQEpiw" async></script>
+</head>
+<body>
+{HEADER}
+
+<main>
+<article class="project-page area-page">
+{hero_html}
+{''.join(crumb_nav)}<h1 style="display: none;">{page['h1']}</h1>
+{body}
+</article>
+</main>
+
+{FOOTER}
+{FAQ_SCRIPT}
+</body>
+</html>
+"""
+
+
 def render(page):
     """page: dict describing one generated page."""
     url = SITE + page["path"]
